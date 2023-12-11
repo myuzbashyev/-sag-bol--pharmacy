@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap");
+
+@import "primeicons/primeicons.css";
+
+/* Body Style */
+.body {
+  font-family: "Open Sans", sans-serif;
+  background-color: #f3f4f6;
+}
+
+.search-600 {
+  width: 600px;
+}
+
+.container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.lint {
+  background-color: #cdd193;
+}
+
+/* Menu Style */
+.p-menuitem-link:hover {
+  background-color: #cdd193;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.p-menuitem-text {
+  color: #013a20;
+}
+
+/* Button Style */
+.p-button-icon {
+  color: #478c5c;
+}
+.p-button {
+  border: 1px solid #478c5c;
+}
+
+.p-menuitem-active {
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+/* Modal Style */
