@@ -6,6 +6,7 @@
       :title="good.title"
       :price="good.price"
       :pharmacy="good.pharmacy"
+      :route="`/category/${good.category}/${good.subcategory}/${good.id}`"
     ></UiCard>
   </ul>
 </template>

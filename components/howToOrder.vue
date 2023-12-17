@@ -19,6 +19,8 @@
         <p>{{ step.para }}</p>
       </li>
     </ul>
+    
+    <nuxt-link to="/" class="flex justify-center text-emerald-green">Içgin tanyş bol</nuxt-link>
   </section>
 </template>
 

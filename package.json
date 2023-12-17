@@ -12,6 +12,7 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/tailwindcss": "^6.9.5",
+    "cross-env": "^7.0.3",
     "nuxt": "^3.8.1",
     "nuxt-primevue": "^0.2.0"
   },

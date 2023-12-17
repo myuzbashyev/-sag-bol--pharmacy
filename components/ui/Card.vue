@@ -1,6 +1,7 @@
 import type { Button } from '#build/components';
 <template>
-  <div
+  <nuxt-link 
+  :to='`${ route}` '
     class="border flex flex-col justify-between rounded p-5 shadow-md w-80 bg-white"
   >
     <div>
@@ -76,11 +77,11 @@ import type { Button } from '#build/components';
         </button>
       </div>
     </div>
-  </div>
+  </nuxt-link>
 </template>
 
 <script>
 export default {
-  props: ["title", "price", "img", "pharmacy"],
+  props: ["title", "price", "img", "pharmacy", 'route'],
 };
 </script>

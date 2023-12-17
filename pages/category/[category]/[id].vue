@@ -32,6 +32,7 @@ export default {
           item.items.find((item) => item.subcategory === this.$route.params.id)
         )
         .items.find((item) => item.subcategory === this.$route.params.id).title;
+        console.log(this.items)
     } catch (e) {
       console.log(e);
     }

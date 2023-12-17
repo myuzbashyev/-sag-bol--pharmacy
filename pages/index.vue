@@ -55,12 +55,13 @@
         <items class="mt-5" :goods="disabilities" />
       </section>
 
-      <HowToOrder class="mb-20"></HowToOrder>
+      <!-- <HowToOrder class="mb-20"></HowToOrder> -->
     </div>
   </nuxt-layout>
 </template>
 
 <script setup lang="ts">
+
 const body = useIsMenuVisible();
 const isSignInMenuOpen = useIsSignInMenuVisible();
 const medicine = useMedicine();
