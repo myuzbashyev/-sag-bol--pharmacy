@@ -34,7 +34,7 @@
           class="text-2xl font-bold text-forest-green hover:text-emerald-green"
           >Saglyk we derman &rarr;</nuxt-link
         >
-        <items class="mt-5" :goods="medicine" />
+        <items class="mt-5 flex-wrap" :goods="medicine" />
       </section>
 
       <section class="container">
@@ -44,7 +44,7 @@
         >
           Lukmançylyk enjamlary &rarr;</nuxt-link
         >
-        <items class="mt-5" :goods="doctor" />
+        <items class="mt-5 flex-wrap" :goods="doctor" />
       </section>
       <section class="container py-16">
         <nuxt-link
@@ -52,7 +52,7 @@
           class="text-2xl font-bold text-forest-green transition-colors ease-in-out hover:text-emerald-green"
           >Maýyp adamlar uçin &rarr;</nuxt-link
         >
-        <items class="mt-5" :goods="disabilities" />
+        <items class="mt-5 flex-wrap" :goods="disabilities" />
       </section>
 
       <!-- <HowToOrder class="mb-20"></HowToOrder> -->
@@ -61,11 +61,17 @@
 </template>
 
 <script setup lang="ts">
-
+const allItems = useAll();
+const medicine: any = allItems.value.filter(
+  (items) => items.category === "medicine"
+);
+const doctor: any = allItems.value.filter(
+  (items) => items.category === "doctor"
+);
+const disabilities: any = allItems.value.filter(
+  (items) => items.category === "disabilities"
+);
 const body = useIsMenuVisible();
 const isSignInMenuOpen = useIsSignInMenuVisible();
-const medicine = useMedicine();
-const doctor = useDoctor();
-const disabilities = useDisabilities();
 const images = useImages();
 </script>
