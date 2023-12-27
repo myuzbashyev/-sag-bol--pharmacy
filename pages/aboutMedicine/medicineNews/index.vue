@@ -1,9 +1,9 @@
 <template>
   <section>
-    <news :news="newsWithId"></news>
+    <news :news="readyNews"></news>
   </section>
 </template>
 
 <script setup>
-const { newsWithId } = useNews();
+const readyNews = await useNews();
 </script>

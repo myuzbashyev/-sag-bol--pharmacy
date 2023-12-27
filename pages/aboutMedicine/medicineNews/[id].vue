@@ -4,8 +4,7 @@
       <img
         class="w-96 h-64 rounded-lg"
         :src="`${
-          newsWithId.find((item) => (item.source.id = +useRoute().params.id))
-            ?.urlToImage
+          newsWithId.find((item) => item.source.id === route)?.urlToImage
         }`"
         alt=""
       />
@@ -14,45 +13,28 @@
           <p>
             {{
               newsWithId
-                .find((item) => (item.source.id = +useRoute().params.id))
+                .find((item) => item.source.id === route)
                 ?.publishedAt.split("T", 1)
                 .join("")
             }}
           </p>
           <p>
-            {{
-              newsWithId.find(
-                (item) => (item.source.id = +useRoute().params.id)
-              )?.author
-            }}
+            {{ newsWithId.find((item) => item.source.id === route)?.author }}
           </p>
         </div>
         <h1 class="text-2xl font-bold">
-          {{
-            newsWithId.find((item) => (item.source.id = +useRoute().params.id))
-              ?.title
-          }}
+          {{ newsWithId.find((item) => item.source.id === route)?.title }}
         </h1>
       </div>
     </article>
     <article>
       <p>
-        {{
-          newsWithId.find((item) => (item.source.id = +useRoute().params.id))
-            ?.description
-        }}
+        {{ newsWithId.find((item) => item.source.id === route)?.description }}
       </p>
     </article>
   </section>
 </template> -->
-<template>
-  <section>
-    {{
-      newsWithId.find((item) => String(item.source.id) === useRoute().params.id)
-    }}
-  </section>
-</template>
 
-<script setup>
-const { newsWithId } = useNews();
-</script>
+<template>
+  <h1>Hello</h1>
+</template>
