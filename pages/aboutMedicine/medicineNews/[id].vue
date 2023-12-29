@@ -1,40 +1,24 @@
-<!-- <template>
+<template>
   <section class="bg-white p-10 rounded-lg">
     <article class="flex gap-16 mb-10 items-end">
-      <img
-        class="w-96 h-64 rounded-lg"
-        :src="`${
-          newsWithId.find((item) => item.source.id === route)?.urlToImage
-        }`"
-        alt=""
-      />
+      <img class="w-96 h-64 rounded-lg" :src="newsItem.urlToImage" />
       <div>
         <div class="flex gap-20">
-          <p>
-            {{
-              newsWithId
-                .find((item) => item.source.id === route)
-                ?.publishedAt.split("T", 1)
-                .join("")
-            }}
-          </p>
-          <p>
-            {{ newsWithId.find((item) => item.source.id === route)?.author }}
-          </p>
+          <p>{{ newsItem.publishedAt.split("T")[0] }}</p>
+          <p>{{ newsItem.author ? newsItem.author : "Неизвестный автор" }}</p>
         </div>
-        <h1 class="text-2xl font-bold">
-          {{ newsWithId.find((item) => item.source.id === route)?.title }}
-        </h1>
+        <h1 class="text-2xl font-bold">{{ newsItem.title }}</h1>
       </div>
     </article>
     <article>
-      <p>
-        {{ newsWithId.find((item) => item.source.id === route)?.description }}
-      </p>
+      <p>{{ newsItem.description }}</p>
     </article>
   </section>
-</template> -->
-
-<template>
-  <h1>Hello</h1>
 </template>
+
+<script lang="ts" setup>
+const newsArray = await useNews();
+const newsItem = newsArray.find(
+  (item: any) => item.publishedAt.split("T")[1] === useRoute().params.id
+);
+</script>

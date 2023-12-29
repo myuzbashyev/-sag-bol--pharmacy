@@ -1,9 +1,9 @@
 <template>
   <section>
-    <news :news="newsArray"></news>
+    <books :books="booksArray"></books>
   </section>
 </template>
 
 <script lang="ts" setup>
-const newsArray = await useNews();
+const booksArray = await useBooks();
 </script>
