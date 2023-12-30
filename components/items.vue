@@ -1,7 +1,7 @@
 <template>
   <ul class="flex gap-5">
     <UiCard
-      v-for="good in goods"
+      v-for="good in goods.slice(0, 3)"
       :img="good.img"
       :title="good.title"
       :price="good.price"

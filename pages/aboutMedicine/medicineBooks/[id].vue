@@ -2,32 +2,35 @@
   <section>
     <div class="bg-white p-5 rounded-lg">
       <div class="flex gap-10">
-        <img :src="bookItem.volumeInfo.imageLinks.thumbnail" alt="Book image" />
+        <img
+          :src="bookItem.volumeInfo?.imageLinks?.thumbnail"
+          alt="Book image"
+        />
         <div>
-          <h1 class="text-3xl">{{ bookItem.volumeInfo.title }}</h1>
+          <h1 class="text-3xl">{{ bookItem.volumeInfo?.title }}</h1>
           <nav class="mb-10 mt-4">
             <ul>
               <li>
                 <span class="font-bold">Awtor :</span>
                 <span class="ml-1">{{
-                  bookItem.volumeInfo.authors.join("")
+                  bookItem.volumeInfo?.authors?.join("")
                 }}</span>
               </li>
               <li>
                 <span class="font-bold">Kategoriýa :</span>
                 <span class="ml-1">{{
-                  bookItem.volumeInfo.categories.join("")
+                  bookItem.volumeInfo?.categories?.join("")
                 }}</span>
               </li>
               <li>
                 <span class="font-bold">Çykarylan senesi :</span>
                 <span class="ml-1">{{
-                  bookItem.volumeInfo.publishedDate
+                  bookItem.volumeInfo?.publishedDate
                 }}</span>
               </li>
               <li>
                 <span class="font-bold">Sahypa sany :</span>
-                <span class="ml-1">{{ bookItem.volumeInfo.pageCount }}</span>
+                <span class="ml-1">{{ bookItem.volumeInfo?.pageCount }}</span>
               </li>
             </ul>
           </nav>
@@ -41,7 +44,7 @@
       </div>
       <article class="mt-10">
         <h1 class="text-2xl">Kitap bilen tanyşdyrylyş</h1>
-        <p class="mt-3">{{ bookItem.volumeInfo.description }}</p>
+        <p class="mt-3">{{ bookItem.volumeInfo?.description }}</p>
       </article>
     </div>
   </section>

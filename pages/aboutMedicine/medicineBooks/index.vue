@@ -6,4 +6,5 @@
 
 <script lang="ts" setup>
 const booksArray = await useBooks();
+console.log(booksArray);
 </script>
