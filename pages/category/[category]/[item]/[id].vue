@@ -65,6 +65,7 @@
             <h1 class="font-bold text-2xl">{{ item.price }} TMT</h1>
             <div class="flex items-center gap-5 flex-1">
               <button
+              @click="addToShoppingCart(item)"
                 class="bg-lint py-3 px-16 w-full flex justify-center rounded-lg transition-colors ease-in-out hover:bg-lint-1"
               >
                 <svg
@@ -119,7 +120,7 @@
                   </g>
                 </svg>
               </button>
-              <Button icon="pi pi-heart" class="bg-white"></Button>
+              <Button icon="pi pi-heart" class="bg-white" @click="addToWishList(item)"></Button>
             </div>
           </div>
         </div>
@@ -134,13 +135,22 @@ export default {
     return {
       allItem: useAll(),
       item: {},
+      wishList:useWishList(),
+      shoppingCart:useShoppingCart(),
     };
+  },
+  methods:{
+addToWishList(wishItem){
+  this.wishList.push(wishItem)
+},
+addToShoppingCart(shoppingItem){
+  this.shoppingCart.push(shoppingItem)
+}
   },
   async mounted() {
     this.item = await this.allItem.find(
       (item) => item.id === +this.$route.params.id
     );
-    console.log(this.item);
   },
 };
 </script>
