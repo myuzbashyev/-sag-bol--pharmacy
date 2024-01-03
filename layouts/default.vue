@@ -321,7 +321,7 @@
         </span>
       </div>
 
-      <nav class="flex justify-between flex-1">
+      <nav class="flex justify-between gap-10 flex-1">
         <ul class="flex flex-col">
           <h1 class="font-bold text-lg mb-1">Biz barada</h1>
           <nuxt-link
@@ -379,21 +379,19 @@
         </ul>
 
         <ul>
-          <h1 class="font-bold text-lg">Kömek</h1>
+          <h1 class="font-bold text-lg">Habarlaşmak</h1>
+          <li
+            class="cursor-pointer text-md mb-1 hover:text-emerald-green transition-colors ease-in-out"
+          ></li>
           <li
             class="cursor-pointer text-md mb-1 hover:text-emerald-green transition-colors ease-in-out"
           >
-            Kömek we goldaw
-          </li>
-          <li
-            class="cursor-pointer text-md mb-1 hover:text-emerald-green transition-colors ease-in-out"
-          >
-            E-poçtalarymyz
+            E-poçtalarymyz: megamaster8856@gmail.com
           </li>
           <li
             class="cursor-pointer text-md hover:text-emerald-green transition-colors ease-in-out"
           >
-            Habarlaşmak
+            Habarlaşmak: +99364028855
           </li>
         </ul>
       </nav>

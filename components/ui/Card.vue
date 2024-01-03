@@ -1,7 +1,7 @@
 import type { Button } from '#build/components';
 <template>
-  <nuxt-link 
-  :to='`${ route}` '
+  <nuxt-link
+    :to="`${route}`"
     class="border flex flex-col justify-between rounded p-5 shadow-md w-80 bg-white"
   >
     <div>
@@ -19,8 +19,13 @@ import type { Button } from '#build/components';
         >
       </div>
       <div class="flex gap-2 mt-3">
-        <Button icon="pi pi-heart" class="bg-transparent"></Button>
+        <Button
+          icon="pi pi-heart"
+          class="bg-transparent"
+          @click="addToWishList"
+        ></Button>
         <button
+          @click="addToShoppingCart"
           class="bg-lint w-full rounded flex justify-center items-center transition-colors ease-in-out hover:bg-lint-1"
         >
           <svg
@@ -82,6 +87,16 @@ import type { Button } from '#build/components';
 
 <script>
 export default {
-  props: ["title", "price", "img", "pharmacy", 'route'],
+  emits: ["addToWishList", "addToShoppingCart"],
+  props: ["title", "price", "img", "pharmacy", "route"],
+
+  methods: {
+    addToWishList() {
+      this.$emit("addToWishList");
+    },
+    addToShoppingCart() {
+      this.$emit("addToShoppingCart");
+    },
+  },
 };
 </script>
