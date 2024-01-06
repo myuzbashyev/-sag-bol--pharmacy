@@ -54,24 +54,22 @@
         >
         <items class="mt-5 flex-wrap" :goods="disabilities" />
       </section>
-
-      <!-- <HowToOrder class="mb-20"></HowToOrder> -->
     </div>
   </nuxt-layout>
 </template>
 
 <script setup lang="ts">
-const allItems = useAll();
-const medicine: any = allItems.value.filter(
+const allItems = useAllItems();
+const medicine: any = allItems.items.filter(
   (items) => items.category === "medicine"
 );
-const doctor: any = allItems.value.filter(
+const doctor: any = allItems.items.filter(
   (items) => items.category === "doctor"
 );
-const disabilities: any = allItems.value.filter(
+const disabilities: any = allItems.items.filter(
   (items) => items.category === "disabilities"
 );
 const body = useIsMenuVisible();
 const isSignInMenuOpen = useIsSignInMenuVisible();
-const images = useImages();
+const images = useAllImages().images;
 </script>

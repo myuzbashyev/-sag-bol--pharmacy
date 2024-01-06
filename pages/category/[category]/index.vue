@@ -25,8 +25,8 @@
 export default {
   data() {
     return {
-      categories: categories(),
-      allItems: useAll(),
+      categories: useAllCategories().categories,
+      allItems: useAllItems().items,
       items: [],
       category: "",
     };

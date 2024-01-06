@@ -18,8 +18,8 @@ export default {
   props: ["goods"],
   data() {
     return {
-      wishList: useWishList(),
-      shoppingCart: useShoppingCart(),
+      wishList: useAllWishList().wishList,
+      shoppingCart: useAllShoppingCart().shoppingCart,
     };
   },
   methods: {

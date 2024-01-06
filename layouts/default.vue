@@ -333,13 +333,13 @@
             Eltip bermek we tölemek
           </nuxt-link>
           <nuxt-link
-            to="privacyPolicy"
+            to="/privacyPolicy"
             class="cursor-pointer text-md mb-1 hover:text-emerald-green transition-colors ease-in-out"
           >
             Ulanyş düzgünleri we gizlinlik ýörelgesi
           </nuxt-link>
           <nuxt-link
-            to="partnership"
+            to="/partnership"
             class="cursor-pointer text-md hover:text-emerald-green transition-colors ease-in-out"
           >
             Hyzmatdaşlyk
@@ -380,8 +380,8 @@ export default {
       isSignInMenuOpen: useIsSignInMenuVisible(),
       isSearchItemsVisible: false,
       searchQuery: "",
-      searchItems: useAll(),
-      categories: categories(),
+      searchItems: useAllItems().items,
+      categories: useAllCategories().categories,
       isMenuVisible: useIsMenuVisible(),
       isSubmenuVisible: false,
       activeIndex: null,

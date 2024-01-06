@@ -4,7 +4,11 @@ export default defineNuxtConfig({
     "@/assets/css/main.css",
     "primevue/resources/themes/viva-light/theme.css",
   ],
-  modules: ["@nuxtjs/tailwindcss", "nuxt-primevue"],
+  modules: ["@nuxtjs/tailwindcss", "nuxt-primevue", "@pinia/nuxt"],
+  alias: {
+    pinia: "/node_modules/@pinia/nuxt/node_modules/pinia/dist/pinia.mjs",
+  },
+
   tailwindcss: {
     configPath: "~/tailwind.config.js",
     cssPath: "@/assets/css/tailwind.css",

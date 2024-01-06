@@ -1,1 +1,5 @@
-export const useWishList = () => useState("wishList", () => []);
+export const useAllWishList = defineStore("wishlist", {
+  state: () => ({
+    wishList: [],
+  }),
+});

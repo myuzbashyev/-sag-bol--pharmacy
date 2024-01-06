@@ -1,1 +1,5 @@
-export const useShoppingCart = () => useState("shoppingCart", () => []);
+export const useAllShoppingCart = defineStore("shoppingCart", {
+  state: () => ({
+    shoppingCart: [],
+  }),
+});

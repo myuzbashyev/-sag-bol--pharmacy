@@ -1,9 +1,19 @@
 <template>
   <section>
-    <news :news="newsArray"></news>
+    <news :news="news.news.articles"></news>
   </section>
 </template>
 
-<script lang="ts" setup>
-const newsArray = await useNews();
+<script>
+export default {
+  setup() {
+    const news = useAllNews();
+    news.getNews();
+  },
+  data() {
+    return {
+      news: useAllNews(),
+    };
+  },
+};
 </script>

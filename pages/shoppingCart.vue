@@ -9,7 +9,6 @@
           <Button
             icon="pi pi-trash"
             label="Sebedi boşat"
-            @click="deleteItemsArray"
             class="bg-lint text-forest-green"
           ></Button>
         </div>
@@ -30,14 +29,14 @@
                 <li class="py-1 border-b">Sebedim:</li>
                 <li class="py-1">
                   Bahasy:
-                  <span class="font-bold">{{ price }} TMT</span>
+                  <span class="font-bold">{{ 1 }} TMT</span>
                 </li>
                 <li class="py-1 border-b">
                   Eltip berme: <span class="font-bold">15 TMT</span>
                 </li>
                 <li class="py-1">
                   Jemi:
-                  <span class="font-bold">{{ price + 15 }} TMT</span>
+                  <span class="font-bold">{{ 1 + 15 }} TMT</span>
                 </li>
               </ul>
             </nav>
@@ -51,44 +50,12 @@
   </nuxt-layout>
 </template>
 
-<!-- <script lang="ts" setup>
-// Initialize an array
-const shoppingCart = useShoppingCart();
-
-// Delete only 1 item
-function deleteItem(id: number) {
-  shoppingCart.value = shoppingCart.value.filter((item: any) => item.id !== id);
-}
-
-// function increaseNumber(price: number, inputNumber: number) {
-//   shoppingCart.value = shoppingCart.value.map(
-//     (item: any) => (item.price = price * inputNumber)
-//   );
-//   console.log(shoppingCart);
-// }
-// Calculate the sum
-function sumOfPrice() {
-  const sum = shoppingCart.value
-    .map((item: any) => item.price)
-    .reduce((a: number, b: number) => a + b, 0);
-  return sum;
-}
-const price = sumOfPrice();
-// Delete all items in ShoppingCart array
-function deleteItemsArray() {
-  shoppingCart.value = [];
-}
-</script> -->
-<script lang="ts" setup>
-const shoppingCart = useShoppingCart();
-function deleteItemsArray() {
-  shoppingCart.value = [];
-}
-function sumOfPrices() {
-  const sum = shoppingCart.value
-    .map((item: any) => item.price)
-    .reduce((a: number, b: number) => a + b, 0);
-  return sum;
-}
-const price = sumOfPrices();
+<script>
+export default {
+  data() {
+    return {
+      shoppingCart: useAllShoppingCart().shoppingCart,
+    };
+  },
+};
 </script>

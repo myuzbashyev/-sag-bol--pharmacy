@@ -1,10 +1,24 @@
 <template>
   <section>
-    <books :books="booksArray"></books>
+    <!-- <books :books="books"></books> -->
   </section>
 </template>
 
-<script lang="ts" setup>
-const booksArray = await useBooks();
-console.log(booksArray);
+<!-- <script>
+export default {
+  data() {
+    return {
+      books: useAllBooks().books,
+    };
+  },
+  async mounted() {
+    await useAllBooks.fetch;
+  },
+};
+</script> -->
+
+<script>
+export default {
+  setup() {},
+};
 </script>

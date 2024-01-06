@@ -17,39 +17,23 @@
           <input
             type="number"
             v-model="inputNumber"
-            @mouseup="increaseNumber(inputNumber)"
-            @mousedown="
-              decreaseNumber(inputNumber === 1 ? inputNumber : inputNumber - 1)
-            "
             min="1"
             class="text-center bg-lint rounded outline-none"
           />
         </div>
       </div>
-      <i class="pi pi-trash absolute right-3 top-3" @click="deleteItem"></i>
+      <i class="pi pi-trash absolute right-3 top-3"></i>
     </div>
   </li>
 </template>
-<script>
-export default {
-  emits: ["deleteItem", "increaseNumber", "decreaseNumber"],
-  props: ["image", "title", "label", "price", "pharmacy"],
-  data() {
-    return {
-      inputNumber: 1,
-    };
-  },
-
-  methods: {
-    deleteItem() {
-      this.$emit("deleteItem");
-    },
-    increaseNumber(incNumber) {
-      this.$emit("increaseNumber", incNumber);
-    },
-    decreaseNumber(decNumber) {
-      this.$emit("decreaseNumber", decNumber);
-    },
-  },
-};
+<script lang="ts" setup>
+const props = defineProps([
+  "image",
+  "label",
+  "title",
+  "pharmacy",
+  "price",
+  "id",
+]);
+const inputNumber = 1;
 </script>

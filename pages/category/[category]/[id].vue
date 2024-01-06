@@ -15,8 +15,8 @@
 export default {
   data() {
     return {
-      allItems: useAll(),
-      categories: categories(),
+      allItems: useAllItems().items,
+      categories: useAllCategories().categories,
       items: [],
       subcategory: "",
     };
@@ -32,7 +32,7 @@ export default {
           item.items.find((item) => item.subcategory === this.$route.params.id)
         )
         .items.find((item) => item.subcategory === this.$route.params.id).title;
-        console.log(this.items)
+      console.log(this.items);
     } catch (e) {
       console.log(e);
     }
