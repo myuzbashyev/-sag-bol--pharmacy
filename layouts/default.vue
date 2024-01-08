@@ -119,7 +119,7 @@
         <button
           class="py-2.5 px-5 rounded-lg bg-white transition-colors duration-150 ease-in-out hover:bg-lint-1 outline-none"
           :class="{ lint: isMenuVisible }"
-          @click="openMenu"
+          @click="isMenuVisible != isMenuVisible"
         >
           <i class="pi pi-th-large"></i>
           Kategoriýalar
@@ -131,7 +131,7 @@
         >
           <InputText
             v-model="searchQuery"
-            @keypress.enter="showSearchItems"
+            @keypress.enter="isSearchVisible != isSearchVisible"
             type="text"
             placeholder="Gözleg ..."
             class="w-full border-none bg-search placeholder:text-forest-green text-forest-green"
@@ -141,7 +141,7 @@
             v-if="searchData.length >= 1"
             class="bg-white absolute top-12 w-full left-0 overflow-y-scroll h-96 rounded"
           >
-            <searchItems :items="searchData"></searchItems>
+            <SearchItems :items="searchData(searchQuery)"></SearchItems>
           </div>
         </span>
       </div>
@@ -154,7 +154,10 @@
               style="font-size: 1.3rem; color: #478c5c"
             ></i>
           </nuxt-link>
-          <button class="flex gap-1 cursor-pointer" @click="openSignInMenu">
+          <button
+            class="flex gap-1 cursor-pointer"
+            @click="isSignInOpen != isSignInOpen"
+          >
             Içeri gir
             <i
               class="pi pi-sign-in"
@@ -173,7 +176,10 @@
               style="font-size: 1.3rem; color: #478c5c"
             ></i>
           </nuxt-link>
-          <button class="flex gap-1 cursor-pointer" @click="openSidebar">
+          <button
+            class="flex gap-1 cursor-pointer"
+            @click="isSidebarVisible != isSidebarVisible"
+          >
             <i
               class="pi pi-align-right"
               style="font-size: 1.3rem; color: #478c5c"
@@ -190,12 +196,12 @@
     >
       <ul class="flex flex-col gap-2 border-r px-5 relative">
         <nuxt-link
-          @click="openMenu"
+          @click="isMenuVisible != isMenuVisible"
           :to="`/${category.category}`"
           class="flex justify-between items-center border rounded-md px-3 py-1 transition-colors ease-in-out border-emerald-green hover:bg-lint-1"
           v-for="(category, index) in categories"
           :key="index"
-          @mouseover="showSubmenu(index)"
+          @mouseover="showSubMenu(index)"
         >
           <span class="flex gap-1 hover:text-emerald-green">
             <img :src="category.icon" alt="Category icon" />
@@ -203,7 +209,7 @@
           </span>
           <i class="pi pi-chevron-right"></i>
           <ul
-            v-if="isSubmenuVisible && index === activeIndex"
+            v-if="isMenuVisible && index === activeIndex"
             class="flex flex-col gap-2 absolute left-80 top-0 w-full"
           >
             <h1
@@ -225,13 +231,13 @@
     </nav>
     <!-- Sign in modal -->
     <SignIn
-      :class="{ 'opacity-100 !visible': isSignInMenuOpen }"
+      :class="{ 'opacity-100 !visible': isSignInOpen }"
       @close-menu="closeSignInMenu"
     ></SignIn>
     <Sidebar
       :class="{ 'translate-x-0': isSidebarVisible }"
-      @close-sidebar="closeSidebar"
-      @open-sign-in="openSignInMenu"
+      @close-sidebar="isSignInOpen = false"
+      @open-sign-in="isSignInOpen != isSignInOpen"
     ></Sidebar>
   </header>
 
@@ -374,61 +380,51 @@
 
 <script>
 export default {
-  data() {
-    return {
-      isSidebarVisible: false,
-      isSignInMenuOpen: useIsSignInMenuVisible(),
-      isSearchItemsVisible: false,
-      searchQuery: "",
-      searchItems: useAllItems().items,
-      categories: useAllCategories().categories,
-      isMenuVisible: useIsMenuVisible(),
-      isSubmenuVisible: false,
-      activeIndex: null,
+  setup() {
+    // store
+    const allItems = useAllItems();
+    const togllersStore = useTogglers();
+    const categoriesStore = useCategories();
+    // refs
+    const searchQuery = ref("");
+    // computed data
+    const headerDate = () => {
+      return (data = new Date().getFullYear());
     };
-  },
-  computed: {
-    footerYear() {
-      let data = new Date().getFullYear();
-      return data;
-    },
-    headerDate() {
-      let data = new Date().toLocaleDateString();
-      return data;
-    },
-    searchData() {
-      const data = this.searchItems.filter((item) =>
-        item.queries.includes(this.searchQuery)
-      );
-      return data;
-    },
-  },
-  methods: {
-    openMenu() {
-      this.isMenuVisible = !this.isMenuVisible;
-    },
-    showSubmenu(index) {
-      this.isSubmenuVisible = true;
-      this.activeIndex = index;
-    },
-    hideMenu() {
-      this.isMenuVisible = !this.isMenuVisible;
-    },
-    showSearchItems() {
-      this.isSearchItemsVisible = !this.isSearchItemsVisible;
-    },
-    openSignInMenu() {
-      this.isSignInMenuOpen = !this.isSignInMenuOpen;
-    },
-    closeSignInMenu() {
-      this.isSignInMenuOpen = false;
-    },
-    openSidebar() {
-      this.isSidebarVisible = true;
-    },
-    closeSidebar() {
-      this.isSidebarVisible = false;
-    },
+    const footerYear = () => {
+      return (data = new Date().toLocaleDateString());
+    };
+    // handlers
+    const showSubMenu = (index) => {
+      isSubMenuVibile = true;
+      activeIndex = index;
+    };
+    const { items, searchData } = storeToRefs(allItems);
+    const {
+      isSidebarVisible,
+      isSignInOpen,
+      isSearchVisible,
+      isMenuVisible,
+      isSubMenuVibile,
+      activeIndex,
+    } = storeToRefs(togllersStore);
+    const { categories } = storeToRefs(categoriesStore);
+    return {
+      items,
+      searchQuery,
+      searchData,
+      headerDate,
+      footerYear,
+      isMenuVisible,
+      isSidebarVisible,
+      isSignInOpen,
+      isSearchVisible,
+      isMenuVisible,
+      isSubMenuVibile,
+      activeIndex,
+      showSubMenu,
+      categories,
+    };
   },
 };
 </script>

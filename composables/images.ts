@@ -1,4 +1,4 @@
-export const useAllImages = defineStore("images", {
+export const useImages = defineStore("images", {
   state: () => ({
     images: [
       {

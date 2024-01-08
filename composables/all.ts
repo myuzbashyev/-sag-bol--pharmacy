@@ -340,4 +340,9 @@ export const useAllItems = defineStore("allItems", {
       },
     ],
   }),
+  getters: {
+    searchData(query) {
+      return this.items.filter((item: any) => item.queries.includes(query));
+    },
+  },
 });

@@ -1,4 +1,4 @@
-export const useAllNews = defineStore("news", {
+export const useNews = defineStore("news", {
   state: () => ({
     news: [],
   }),

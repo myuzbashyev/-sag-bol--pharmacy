@@ -1,4 +1,4 @@
-export const useAllCategories = defineStore("categories", {
+export const useCategories = defineStore("categories", {
   state: () => ({
     categories: [
       {
