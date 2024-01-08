@@ -344,5 +344,14 @@ export const useAllItems = defineStore("allItems", {
     searchData(query) {
       return this.items.filter((item: any) => item.queries.includes(query));
     },
+    medicine():object{
+      return this.items.filter((item:any)=>item.category === 'medicine')
+    },
+    doctor():object{
+      return this.items.filter((item:any)=>item.category === 'doctor')
+    }, 
+    disabilities():object{
+      return this.items.filter((item:any)=>item.category === 'disabilities')
+    },
   },
 });

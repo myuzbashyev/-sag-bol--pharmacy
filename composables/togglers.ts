@@ -1,4 +1,4 @@
-const useTogglers = defineStore("togglers", {
+export const useTogglers = defineStore("togglers", {
   state: () => ({
     isSidebarVisible: false,
     isSignInOpen: false,
