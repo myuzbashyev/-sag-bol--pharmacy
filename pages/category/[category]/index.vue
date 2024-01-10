@@ -2,47 +2,54 @@
   <NuxtLayout>
     <section class="container py-10">
       <h1 class="text-2xl font-bold text-forest-green">
-        {{ category.label }}
+        {{ filteredCategory.label }}
       </h1>
       <nav class="py-5 border-b border-forest-green mb-5">
         <ul>
           <nuxt-link
             class="py-1 px-5 border mr-5 rounded-full bg-white"
-            :to="`${this.$route.fullPath}/${subitem.subcategory}`"
-            v-for="subitem in category.items"
-            :key="subitem.title"
-            >{{ subitem.title }}</nuxt-link
+            :to="`${useRoute().fullPath}/${subcategory.subcategory}`"
+            v-for="subcategory in filteredCategory.items"
+            :key="subcategory.title"
+            >{{ subcategory.title }}</nuxt-link
           >
         </ul>
       </nav>
 
-      <items :goods="items" class="flex-wrap"></items>
+      <nav>
+        <ul class="flex flex-wrap gap-1">
+          <UiCard
+            v-for="item in filteredItems"
+            :title="item.title"
+            :img="item.img"
+            :price="item.price"
+            :pharmacy="item.pharmacy"
+            :isFav="item.isFav"
+            :route="`/category/${item.category}/${item.subcategory}/${item.id}`"
+          ></UiCard>
+        </ul>
+      </nav>
     </section>
   </NuxtLayout>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      categories: useAllCategories().categories,
-      allItems: useAllItems().items,
-      items: [],
-      category: "",
-    };
-  },
+<script setup>
+// All items store
+const allItemsStore = useAllItems();
+const { items } = storeToRefs(allItemsStore);
 
-  async mounted() {
-    try {
-      this.items = this.allItems.filter(
-        (item) => item.category === this.$route.params.category
-      );
-      this.category = this.categories.find(
-        (item) => `/${item.category}` === this.$route.fullPath
-      );
-    } catch (e) {
-      console.log(e);
-    }
-  },
-};
+// Filter items by id
+
+const filteredItems = items.value.filter(
+  (item) => item.category === useRoute().params.category
+);
+console.log(filteredItems);
+
+// Categories store
+const categoriesStore = useCategories();
+const { categories } = storeToRefs(categoriesStore);
+// Find a category by id
+const filteredCategory = categories.value.find(
+  (item) => `/${item.category}` === useRoute().fullPath
+);
 </script>

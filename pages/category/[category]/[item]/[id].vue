@@ -5,67 +5,67 @@
         class="flex justify-around items-center bg-white rounded-lg p-5 border shadow"
       >
         <div class="p-32 border rounded-lg flex h-1/2">
-          <img :src="item.img" alt="Image of medicine" />
+          <img :src="filteredItem.img" alt="Image of medicine" />
         </div>
         <div class="w-1/2">
           <nav class="mb-5">
             <ul>
               <li class="p-1">
                 <span class="font-bold">Ady : </span>
-                <span>{{ item.title }}</span>
+                <span>{{ filteredItem.title }}</span>
               </li>
               <li class="p-1">
                 <span class="font-bold"> Kategoriýasy : </span>
-                <span>{{ item.label }}</span>
+                <span>{{ filteredItem.label }}</span>
               </li>
-              <ul v-if="item.characteristics" class="my-5">
+              <ul v-if="filteredItem.characteristics" class="my-5">
                 <li class="p-1">
                   <span class="font-bold"> Harakteristika: </span>
                 </li>
                 <li class="p-1">
                   <span class="font-bold"> Düzüjisi: </span>
-                  <span>{{ item?.characteristics?.substance }}</span>
+                  <span>{{ filteredItem?.characteristics?.substance }}</span>
                 </li>
 
                 <li class="p-1">
                   <span class="font-bold"> Çykarylan ýurdy: </span>
 
-                  <span>{{ item?.characteristics?.country }}</span>
+                  <span>{{ filteredItem?.characteristics?.country }}</span>
                 </li>
                 <li class="p-1">
                   <span class="font-bold"> Çykaran kompaniýasy: </span>
 
-                  <span>{{ item?.characteristics?.manufacturer }}</span>
+                  <span>{{ filteredItem?.characteristics?.manufacturer }}</span>
                 </li>
                 <li class="p-1">
                   <span class="font-bold"> Lukmanyň görkezmesi boýunça: </span>
 
                   <span>
-                    {{ item?.characteristics?.prescription }}
+                    {{ filteredItem?.characteristics?.prescription }}
                   </span>
                 </li>
                 <li class="p-1">
                   <span class="font-bold"> Derman serişdäniň formasy: </span>
-                  <span>{{ item?.characteristics?.form }}</span>
+                  <span>{{ filteredItem?.characteristics?.form }}</span>
                 </li>
               </ul>
             </ul>
             <ul>
               <li class="font-bold p-1">Instruksiýa:</li>
               {{
-                item.instructions
+                filteredItem.instructions
               }}
               <li class="p-1">
                 <span class="font-bold">Dermanhana: </span>
-                <span>{{ item.pharmacy }}</span>
+                <span>{{ filteredItem.pharmacy }}</span>
               </li>
             </ul>
           </nav>
           <div class="flex gap-10 items-center mt-10">
-            <h1 class="font-bold text-2xl">{{ item.price }} TMT</h1>
+            <h1 class="font-bold text-2xl">{{ filteredItem.price }} TMT</h1>
             <div class="flex items-center gap-5 flex-1">
               <button
-                @click="addToShoppingCart(item)"
+                @click="allItemsStore.addToShoppingCart(filteredItem.id)"
                 class="bg-lint py-3 px-16 w-full flex justify-center rounded-lg transition-colors ease-in-out hover:bg-lint-1"
               >
                 <svg
@@ -121,9 +121,9 @@
                 </svg>
               </button>
               <Button
-                icon="pi pi-heart"
+                :icon="filteredItem?.isFav ? 'pi pi-heart-fill' : 'pi pi-heart'"
                 class="bg-white"
-                @click="addToWishList(item)"
+                @click="allItemsStore.toggleFav(filteredItem.id)"
               ></Button>
             </div>
           </div>
@@ -133,28 +133,10 @@
   </nuxt-layout>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      allItem: useAllItems().items,
-      item: {},
-      wishList: useAllWishList().wishList,
-      shoppingCart: useAllShoppingCart().shoppingCart,
-    };
-  },
-  methods: {
-    addToWishList(wishItem) {
-      this.wishList.push(wishItem);
-    },
-    addToShoppingCart(shoppingItem) {
-      this.shoppingCart.push(shoppingItem);
-    },
-  },
-  async mounted() {
-    this.item = await this.allItem.find(
-      (item) => item.id === +this.$route.params.id
-    );
-  },
-};
+<script setup>
+const allItemsStore = useAllItems();
+const { items } = storeToRefs(allItemsStore);
+const filteredItem = items.value.find(
+  (item) => item.id === +useRoute().params.id
+);
 </script>

@@ -16,8 +16,6 @@
           <h2 class="font-bold text-lg">{{ price }} TMT</h2>
           <input
             type="number"
-            v-model="inputNumber"
-            min="1"
             class="text-center bg-lint rounded outline-none"
           />
         </div>
@@ -26,14 +24,13 @@
     </div>
   </li>
 </template>
-<script lang="ts" setup>
-const props = defineProps([
-  "image",
-  "label",
-  "title",
-  "pharmacy",
-  "price",
-  "id",
-]);
-const inputNumber = 1;
+<script setup>
+const props = defineProps({
+  image: String,
+  label: String,
+  title: String,
+  pharmacy: String,
+  price: Number,
+});
+const { image, label, title, pharmacy, price } = toRefs(props);
 </script>

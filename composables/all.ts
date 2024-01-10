@@ -19,6 +19,7 @@ export const useAllItems = defineStore("allItems", {
         subcategory: "painkiller",
         price: Math.ceil(Math.random() * 100),
         id: 1,
+        isFav: false,
         pharmacy: "Şypaly Çomuç",
         queries: ["trimol", "Trimol", "тримол", "Тримол"],
       },
@@ -42,6 +43,7 @@ export const useAllItems = defineStore("allItems", {
         subcategory: "vitamins",
         price: Math.ceil(Math.random() * 100),
         id: 2,
+        isFav: false,
         pharmacy: "Tebip",
         queries: ["askorutin", "Askorutin", "аскорутин", "Аскорутин"],
       },
@@ -65,6 +67,7 @@ export const useAllItems = defineStore("allItems", {
         subcategory: "flu",
         price: Math.ceil(Math.random() * 100),
         id: 3,
+        isFav: false,
         pharmacy: "Mähirli ýollar",
         queries: ["antigrippin", "Antigrippin ", "антигриппин", "Антигриппин"],
       },
@@ -87,6 +90,7 @@ export const useAllItems = defineStore("allItems", {
         subcategory: "painkiller",
         price: Math.ceil(Math.random() * 100),
         id: 1,
+        isFav: false,
         pharmacy: "Tebip",
         queries: ["trimol", "Trimol", "тримол", "Тримол"],
       },
@@ -110,6 +114,7 @@ export const useAllItems = defineStore("allItems", {
         subcategory: "vitamins",
         price: Math.ceil(Math.random() * 100),
         id: 2,
+        isFav: false,
         pharmacy: "Mähirli ýollar",
         queries: ["askorutin", "Askorutin", "аскорутин", "Аскорутин"],
       },
@@ -133,6 +138,7 @@ export const useAllItems = defineStore("allItems", {
         subcategory: "flu",
         price: Math.ceil(Math.random() * 100),
         id: 3,
+        isFav: false,
         pharmacy: "Şypaly Çomuç",
         queries: ["antigrippin", "Antigrippin ", "антигриппин", "Антигриппин"],
       },
@@ -147,6 +153,7 @@ export const useAllItems = defineStore("allItems", {
         subcategory: "fonendoskop",
         price: Math.ceil(Math.random() * 100),
         id: 4,
+        isFav: false,
         pharmacy: "Şypaly Çomuç",
         queries: ["fonendoskop", "Fonendoskop", "фонендоскоп", "Фонендоскоп"],
       },
@@ -162,6 +169,7 @@ export const useAllItems = defineStore("allItems", {
         subcategory: "termometr",
         price: Math.ceil(Math.random() * 100),
         id: 5,
+        isFav: false,
         pharmacy: "Tebip",
         queries: ["termometr", "Termometr", "Термометр", "термометр"],
       },
@@ -178,6 +186,7 @@ export const useAllItems = defineStore("allItems", {
         subcategory: "tonometr",
         price: Math.ceil(Math.random() * 100),
         id: 6,
+        isFav: false,
         pharmacy: "Mähirli ýollar",
         queries: ["tonometr", "Tonometr", "Тонометр", "тонометр"],
       },
@@ -193,6 +202,7 @@ export const useAllItems = defineStore("allItems", {
         subcategory: "fonendoskop",
         price: Math.ceil(Math.random() * 100),
         id: 7,
+        isFav: false,
         pharmacy: "Tebip",
         queries: ["fonendoskop", "Fonendoskop", "фонендоскоп", "Фонендоскоп"],
       },
@@ -208,6 +218,7 @@ export const useAllItems = defineStore("allItems", {
         subcategory: "termometr",
         price: Math.ceil(Math.random() * 100),
         id: 8,
+        isFav: false,
         pharmacy: "Mähirli ýollar",
         queries: ["termometr", "Termometr", "Термометр", "термометр"],
       },
@@ -224,6 +235,7 @@ export const useAllItems = defineStore("allItems", {
         subcategory: "tonometr",
         price: Math.ceil(Math.random() * 100),
         id: 9,
+        isFav: false,
         pharmacy: "Şypaly Çomuç",
         queries: ["tonometr", "Tonometr", "Тонометр", "тонометр"],
       },
@@ -238,6 +250,7 @@ export const useAllItems = defineStore("allItems", {
         subcategory: "wheelchairs",
         price: Math.ceil(Math.random() * 100),
         id: 10,
+        isFav: false,
         pharmacy: "Şypaly Çomuç",
         queries: [
           "tigirli otyrgyç",
@@ -259,6 +272,7 @@ export const useAllItems = defineStore("allItems", {
         subcategory: "crutches",
         price: Math.ceil(Math.random() * 100),
         id: 11,
+        isFav: false,
         pharmacy: "Tebip",
         queries: ["pişek", "Pişek", "костыли", "Костыли"],
       },
@@ -274,6 +288,7 @@ export const useAllItems = defineStore("allItems", {
         subcategory: "hearing_aid",
         price: Math.ceil(Math.random() * 100),
         id: 12,
+        isFav: false,
         pharmacy: "Mähirli ýollar",
         queries: [
           "eşidiş enjam",
@@ -294,6 +309,7 @@ export const useAllItems = defineStore("allItems", {
         subcategory: "wheelchairs",
         price: Math.ceil(Math.random() * 100),
         id: 13,
+        isFav: false,
         pharmacy: "Tebip",
         queries: [
           "tigirli otyrgyç",
@@ -315,6 +331,7 @@ export const useAllItems = defineStore("allItems", {
         subcategory: "crutches",
         price: Math.ceil(Math.random() * 100),
         id: 14,
+        isFav: false,
         pharmacy: "Mähirli ýollar",
         queries: ["pişek", "Pişek", "костыли", "Костыли"],
       },
@@ -330,28 +347,44 @@ export const useAllItems = defineStore("allItems", {
         subcategory: "hearing_aid",
         price: Math.ceil(Math.random() * 100),
         id: 15,
+        isFav: false,
         pharmacy: "Şypaly Çomuç",
         queries: [
           "eşidiş enjam",
           "Eşidiş enjam",
+
           "Слуховой аппарат",
           "слуховой аппарат",
         ],
       },
     ],
+    shoppingCart: [],
   }),
   getters: {
     searchData(query) {
       return this.items.filter((item: any) => item.queries.includes(query));
     },
-    medicine():object{
-      return this.items.filter((item:any)=>item.category === 'medicine')
+    medicine(): object {
+      return this.items.filter((item: any) => item.category === "medicine");
     },
-    doctor():object{
-      return this.items.filter((item:any)=>item.category === 'doctor')
-    }, 
-    disabilities():object{
-      return this.items.filter((item:any)=>item.category === 'disabilities')
+    doctor(): object {
+      return this.items.filter((item: any) => item.category === "doctor");
+    },
+    disabilities(): object {
+      return this.items.filter((item: any) => item.category === "disabilities");
+    },
+    favItems(): object {
+      return this.items.filter((item: any) => item.isFav === true);
+    },
+  },
+  actions: {
+    toggleFav(id: number) {
+      const favItem = this.items.find((item) => item.id === id);
+      if (favItem) favItem.isFav = !favItem.isFav;
+    },
+    addToShoppingCart(id: number) {
+      const shoppingItem = this.items.find((item) => item.id === id);
+      this.shoppingCart.push(shoppingItem);
     },
   },
 });

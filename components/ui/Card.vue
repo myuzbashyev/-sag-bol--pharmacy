@@ -1,4 +1,3 @@
-import type { Button } from '#build/components';
 <template>
   <nuxt-link
     :to="`${route}`"
@@ -20,12 +19,11 @@ import type { Button } from '#build/components';
       </div>
       <div class="flex gap-2 mt-3">
         <Button
-          icon="pi pi-heart"
+          :icon="isFav ? 'pi pi-heart-fill' : 'pi pi-heart'"
           class="bg-transparent"
-          @click="addToWishList"
         ></Button>
         <button
-          @click="addToShoppingCart"
+          @click="allItemsStore.addToShoppingCart(id)"
           class="bg-lint w-full rounded flex justify-center items-center transition-colors ease-in-out hover:bg-lint-1"
         >
           <svg
@@ -85,18 +83,16 @@ import type { Button } from '#build/components';
   </nuxt-link>
 </template>
 
-<script>
-export default {
-  emits: ["addToWishList", "addToShoppingCart"],
-  props: ["title", "price", "img", "pharmacy", "route"],
+<script setup>
+const props = defineProps({
+  title: String,
+  price: Number,
+  img: String,
+  pharmacy: String,
+  route: String,
+  isFav: Boolean,
+});
+const { title, price, img, pharmacy, route, isFav } = toRefs(props);
 
-  methods: {
-    addToWishList() {
-      this.$emit("addToWishList");
-    },
-    addToShoppingCart() {
-      this.$emit("addToShoppingCart");
-    },
-  },
-};
+const allItemsStore = useAllItems();
 </script>

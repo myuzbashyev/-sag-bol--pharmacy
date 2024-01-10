@@ -1,34 +1,42 @@
 <template>
- <nuxt-layout>
-  <section>
-   <div class="container py-16">
-    <div class="flex justify-between mb-5">
-     <h1 class="text-2xl font-bold">Halanlarym ({{ wishList.length }})</h1>
-     <Button
-      icon="pi pi-heart"
-      label="Sanawy boşat"
-      @click="deleteArray"
-      class="bg-lint text-forest-green"
-     ></Button>
-    </div>
-    <div
-     v-if="wishList.length <= 0"
-     class="bg-white w-full h-96 flex justify-center items-center gap-5 shadow rounded"
-    >
-     <i class="pi pi-heart text-9xl"></i>
-     <h1 class="text-3xl">Halan dermanlaryňyzyň sanawy boş</h1>
-    </div>
-    <items v-else :goods="wishList"></items>
-   </div>
-  </section>
- </nuxt-layout>
+  <nuxt-layout>
+    <section class="h-screen">
+      <div class="container p-10">
+        <div class="flex justify-between mb-5">
+          <h1 class="text-2xl font-bold">Halanlarym ({{ favItems.length }})</h1>
+          <Button
+            icon="pi pi-heart"
+            label="Sanawy boşat"
+            class="bg-lint text-forest-green"
+          ></Button>
+        </div>
+        <div
+          v-if="favItems.length <= 0"
+          class="bg-white w-full h-96 flex justify-center items-center gap-5 shadow rounded"
+        >
+          <i class="pi pi-heart text-9xl"></i>
+          <h1 class="text-3xl">Halan dermanlaryňyzyň sanawy boş</h1>
+        </div>
+        <nav v-else>
+          <ul class="flex flex-wrap gap-1">
+            <UiCard
+              v-for="item in favItems"
+              :title="item.title"
+              :img="item.img"
+              :pharmacy="item.pharmacy"
+              :price="item.price"
+              :isFav="item.isFav"
+              :route="
+                `/category/${item.category}/${item.subcategory}/` + item.id
+              "
+            ></UiCard>
+          </ul>
+        </nav>
+      </div>
+    </section>
+  </nuxt-layout>
 </template>
-<script>
-export default {
- setup() {
-  const wishListStore = useWishList();
-  const { wishList } = storeToRefs(wishListStore);
-  return { wishList };
- },
-};
+<script setup>
+const allItemsStore = useAllItems();
+const { favItems } = storeToRefs(allItemsStore);
 </script>
