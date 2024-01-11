@@ -16,9 +16,10 @@
   </section>
 </template>
 
-<script lang="ts" setup>
-const newsArray = await useNews();
-const newsItem = newsArray.find(
-  (item: any) => item.publishedAt.split("T")[1] === useRoute().params.id
+<script setup>
+const newsStore = useNews();
+const { news } = storeToRefs(newsStore);
+const newsItem = news.value.find(
+  (item) => item.publishedAt.split("T")[1] === useRoute().params.id
 );
 </script>

@@ -3,6 +3,7 @@
     <div class="bg-white p-5 rounded-lg">
       <div class="flex gap-10">
         <img
+          v-if="bookItem.volumeInfo?.imageLinks?.thumbnail !== undefined"
           :src="bookItem.volumeInfo?.imageLinks?.thumbnail"
           alt="Book image"
         />
@@ -35,7 +36,7 @@
             </ul>
           </nav>
           <nuxt-link
-            :to="bookItem.volumeInfo.previewLink"
+            :to="bookItem.volumeInfo?.previewLink"
             target="_blank"
             class="bg-lint py-3 px-5 rounded-lg transition-colors ease-in-out hover:bg-lint-1"
             >Online okamak</nuxt-link
@@ -50,10 +51,8 @@
   </section>
 </template>
 
-<script lang="ts" setup>
-const bookArray = await useBooks();
-const bookItem = bookArray.find(
-  (item: any) => item.id === useRoute().params.id
-);
-console.log(bookItem);
+<script setup>
+const booksStore = useBooks();
+const { books } = storeToRefs(booksStore);
+const bookItem = books.value.find((item) => item.id === useRoute().params.id);
 </script>

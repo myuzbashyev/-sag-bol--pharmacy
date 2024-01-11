@@ -376,6 +376,11 @@ export const useAllItems = defineStore("allItems", {
     favItems(): object {
       return this.items.filter((item: any) => item.isFav === true);
     },
+    sum(): number {
+      return this.shoppingCart
+        .map((item: any) => item.price)
+        .reduce((a, b) => a + b, 0);
+    },
   },
   actions: {
     toggleFav(id: number) {
@@ -385,6 +390,22 @@ export const useAllItems = defineStore("allItems", {
     addToShoppingCart(id: number) {
       const shoppingItem = this.items.find((item) => item.id === id);
       this.shoppingCart.push(shoppingItem);
+    },
+    deleteFromShoppingCart(id: number) {
+      this.shoppingCart = this.shoppingCart.filter(
+        (item: any) => item.id !== id
+      );
+    },
+    increasePrice(id: number, input: number) {
+      const shItem = this.items.find((item) => item.id === id);
+      if (shItem) shItem.price = shItem.price * input;
+    },
+    decreasePrice(id: number, input: number) {
+      const shItem = this.items.find((item) => item.id === id);
+      if (shItem) shItem.price = shItem.price / input;
+    },
+    clearShoppingCart() {
+      this.shoppingCart = [];
     },
   },
 });

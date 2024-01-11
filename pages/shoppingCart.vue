@@ -7,6 +7,7 @@
             Sebedim ({{ shoppingCart.length }})
           </h1>
           <Button
+            @click="allItemsStore.clearShoppingCart"
             icon="pi pi-trash"
             label="Sebedi boşat"
             class="bg-lint text-forest-green"
@@ -25,11 +26,12 @@
               <ul>
                 <ShoppingItem
                   v-for="shItem in shoppingCart"
-                  :image="shItem.image"
+                  :image="shItem.img"
                   :label="shItem.label"
                   :title="shItem.title"
                   :pharmacy="shItem.pharmacy"
                   :price="shItem.price"
+                  :id="shItem.id"
                 ></ShoppingItem>
               </ul>
             </nav>
@@ -40,14 +42,14 @@
                 <li class="py-1 border-b">Sebedim:</li>
                 <li class="py-1">
                   Bahasy:
-                  <span class="font-bold">{{ 1 }} TMT</span>
+                  <span class="font-bold">{{ sum }} TMT</span>
                 </li>
                 <li class="py-1 border-b">
                   Eltip berme: <span class="font-bold">15 TMT</span>
                 </li>
                 <li class="py-1">
                   Jemi:
-                  <span class="font-bold">{{ 1 + 15 }} TMT</span>
+                  <span class="font-bold">{{ sum + 15 }} TMT</span>
                 </li>
               </ul>
             </nav>
@@ -65,5 +67,5 @@
 import ShoppingItem from "~/components/ui/shoppingItem.vue";
 
 const allItemsStore = useAllItems();
-const { shoppingCart } = storeToRefs(allItemsStore);
+const { shoppingCart, sum } = storeToRefs(allItemsStore);
 </script>

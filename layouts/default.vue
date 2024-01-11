@@ -247,7 +247,7 @@
 
   <slot />
   <footer class="bg-lint">
-    <div class="container flex py-10">
+    <div class="container flex flex-wrap py-10">
       <div class="flex w-1/3">
         <svg
           class="mr-2"

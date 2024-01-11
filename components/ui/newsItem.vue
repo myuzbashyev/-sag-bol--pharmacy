@@ -12,8 +12,13 @@
   </nuxt-link>
 </template>
 
-<script>
-export default {
-  props: ["image", "title", "description", "publishedAt", "link"],
-};
+<script setup>
+const props = defineProps({
+  link: String,
+  image: String,
+  title: String,
+  description: String,
+  publishedAt: String,
+});
+const { link, image, title, description, publishedAt } = toRefs(props);
 </script>

@@ -2,7 +2,7 @@
   <nuxt-layout>
     <div
       :class="{
-        'blur overflow-hidden': body || isSignInOpen,
+        'blur overflow-hidden': isSignInOpen || isMenuVisible,
       }"
     >
       <section class="mt-5">
@@ -69,7 +69,7 @@ const { medicine, doctor, disabilities } = storeToRefs(allItemsStore);
 
 // Togglers store
 const togglersStore = useTogglers();
-const { isSignInOpen } = storeToRefs(togglersStore);
+const { isSignInOpen, isMenuVisible } = storeToRefs(togglersStore);
 
 // Images store
 const imagesStore = useImages();

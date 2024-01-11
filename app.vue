@@ -2,7 +2,7 @@
   <nuxt-page> </nuxt-page>
 </template>
 
-<script setup lang="ts">
+<script setup>
 useHead({
   bodyAttrs: {
     class: "body",

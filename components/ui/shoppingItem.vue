@@ -14,13 +14,26 @@
         </div>
         <div class="text-center">
           <h2 class="font-bold text-lg">{{ price }} TMT</h2>
-          <input
-            type="number"
-            class="text-center bg-lint rounded outline-none"
-          />
+          <div class="bg-lint px-2 rounded">
+            <button @click="decrease" class="outline-none">
+              <i class="pi pi-minus"></i>
+            </button>
+            <input
+              type="text"
+              inputmode="numeric"
+              v-model="numInput"
+              class="bg-lint text-center outline-none"
+            />
+            <button @click="increase" class="outline-none">
+              <i class="pi pi-plus"></i>
+            </button>
+          </div>
         </div>
       </div>
-      <i class="pi pi-trash absolute right-3 top-3"></i>
+      <i
+        class="pi pi-trash absolute right-3 top-3"
+        @click="allItemsStore.deleteFromShoppingCart(id)"
+      ></i>
     </div>
   </li>
 </template>
@@ -31,6 +44,18 @@ const props = defineProps({
   title: String,
   pharmacy: String,
   price: Number,
+  id: Number,
 });
-const { image, label, title, pharmacy, price } = toRefs(props);
+const { image, label, title, pharmacy, price, id } = toRefs(props);
+const numInput = ref(1);
+function increase() {
+  numInput.value += 1;
+  allItemsStore.increasePrice(id.value, numInput.value);
+}
+function decrease() {
+  allItemsStore.decreasePrice(id.value, numInput.value);
+  numInput.value >= 2 ? (numInput.value -= 1) : numInput.value;
+}
+
+const allItemsStore = useAllItems();
 </script>

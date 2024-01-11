@@ -43,7 +43,6 @@ const { items } = storeToRefs(allItemsStore);
 const filteredItems = items.value.filter(
   (item) => item.category === useRoute().params.category
 );
-console.log(filteredItems);
 
 // Categories store
 const categoriesStore = useCategories();

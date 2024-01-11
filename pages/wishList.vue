@@ -2,14 +2,9 @@
   <nuxt-layout>
     <section class="h-screen">
       <div class="container p-10">
-        <div class="flex justify-between mb-5">
-          <h1 class="text-2xl font-bold">Halanlarym ({{ favItems.length }})</h1>
-          <Button
-            icon="pi pi-heart"
-            label="Sanawy boşat"
-            class="bg-lint text-forest-green"
-          ></Button>
-        </div>
+        <h1 class="text-2xl font-bold mb-5">
+          Halanlarym ({{ favItems.length }})
+        </h1>
         <div
           v-if="favItems.length <= 0"
           class="bg-white w-full h-96 flex justify-center items-center gap-5 shadow rounded"
