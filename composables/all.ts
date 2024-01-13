@@ -359,10 +359,11 @@ export const useAllItems = defineStore("allItems", {
       },
     ],
     shoppingCart: [],
+    search: [],
   }),
   getters: {
-    searchData(query) {
-      return this.items.filter((item: any) => item.queries.includes(query));
+    searchItems(): Array {
+      return this.search;
     },
     medicine(): object {
       return this.items.filter((item: any) => item.category === "medicine");
@@ -406,6 +407,18 @@ export const useAllItems = defineStore("allItems", {
     },
     clearShoppingCart() {
       this.shoppingCart = [];
+    },
+    searchByInput(input: string) {
+      if (input !== "") {
+        let searchItem = this.items.filter((item) =>
+          item.queries.includes(input)
+        );
+        searchItem !== undefined
+          ? (this.search = [...searchItem])
+          : (searchItem = "");
+      } else {
+        this.search = [];
+      }
     },
   },
 });

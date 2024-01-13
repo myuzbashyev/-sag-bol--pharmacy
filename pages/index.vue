@@ -58,6 +58,7 @@
         >
         <items class="mt-5 flex-wrap" :goods="disabilities" />
       </section>
+      <ScrollTop></ScrollTop>
     </div>
   </nuxt-layout>
 </template>

@@ -96,12 +96,12 @@
               to="https://meteo.gov.tm"
               target="_blank"
               title="Howa maglumaty"
-              class="px-2"
+              class="px-2 text-emerald-green"
             >
               <i class="pi pi-cloud text-xl"></i>
             </nuxt-link>
             <li class="px-2" title="Şu günki sene">
-              <i class="pi pi-calendar text-xl"></i>
+              <i class="pi pi-calendar text-xl text-emerald-green"></i>
               {{ headerDate }}
             </li>
           </ul>
@@ -109,6 +109,7 @@
       </div>
     </div>
   </section>
+
   <header
     class="p-2 text-forest-green sticky top-0 bg-white shadow-md z-10 transition-all duration-150 ease-in-out"
   >
@@ -135,17 +136,30 @@
         >
           <InputText
             v-model="searchQuery"
-            @keypress.enter="isSearchVisible != isSearchVisible"
+            @input="search"
+            @keydown.enter="navigate"
             type="text"
             placeholder="Gözleg ..."
             class="w-full border-none bg-search placeholder:text-forest-green text-forest-green"
           />
-          <i class="pi pi-search" style="color: #478c5c"></i>
+          <div class="flex gap-5 items-center">
+            <i
+              v-if="searchQuery !== ''"
+              class="pi pi-times"
+              style="color: #478c5c"
+              @click="clearInput"
+            ></i>
+            <button class="bg-lint py-1 px-5 rounded-lg" @click="navigate">
+              <i class="pi pi-search" style="color: #478c5c"></i>
+            </button>
+          </div>
           <div
-            v-if="searchData.length >= 1"
-            class="bg-white absolute top-12 w-full left-0 overflow-y-scroll h-96 rounded"
+            class="bg-white absolute top-12 w-full left-0 overflow-y-scroll h-96 rounded opacity-0 transition-opacity duration-300 ease-in-out invisible"
+            :class="{
+              'opacity-100 !visible': isSearchVisible && searchItems.length > 0,
+            }"
           >
-            <SearchItems :items="searchData(searchQuery)"></SearchItems>
+            <SearchItems :items="searchItems"></SearchItems>
           </div>
         </span>
       </div>
@@ -180,7 +194,12 @@
               style="font-size: 1.3rem; color: #478c5c"
             ></i>
           </nuxt-link>
-          <button
+          <nuxt-link to="/aboutMedicine"
+            ><i class="pi pi-book" style="font-size: 1.3rem; color: #478c5c"></i
+          ></nuxt-link>
+
+          <!-- Sidebar button -->
+          <!-- <button
             class="flex gap-1 cursor-pointer"
             @click="isSidebarVisible = !isSidebarVisible"
           >
@@ -188,7 +207,7 @@
               class="pi pi-align-right"
               style="font-size: 1.3rem; color: #478c5c"
             ></i>
-          </button>
+          </button> -->
         </ul>
       </div>
     </div>
@@ -233,19 +252,22 @@
         </nuxt-link>
       </ul>
     </nav>
-    <!-- Sign in modal -->
+    <!-- Sign in  -->
     <SignIn
       :class="{ 'opacity-100 !visible': isSignInOpen }"
       @close-menu="isSignInOpen = false"
     ></SignIn>
-    <Sidebar
+
+    <!-- Sidebar -->
+    <!-- <Sidebar
       :class="{ 'translate-x-0': isSidebarVisible }"
       @close-sidebar="isSidebarVisible = false"
       @open-sign-in="isSignInOpen = !isSignInOpen"
-    ></Sidebar>
+    ></Sidebar> -->
   </header>
 
   <slot />
+  <!-- footer -->
   <footer class="bg-lint">
     <div class="container flex flex-wrap py-10">
       <div class="flex w-1/3">
@@ -385,13 +407,22 @@
 <script setup>
 // All items store
 const allItemsStore = useAllItems();
-const { searchData } = storeToRefs(allItemsStore);
-
+const { searchItems } = storeToRefs(allItemsStore);
 const searchQuery = ref("");
-
-function showSubMenu(index) {
-  isSubMenuVisible.value = true;
-  activeIndex.value = index;
+function search() {
+  isSearchVisible.value = true;
+  allItemsStore.searchByInput(searchQuery.value);
+}
+function navigate() {
+  if (searchItems.value !== null) {
+    useRouter().push({ path: "/searchPage" });
+    isSearchVisible.value = false;
+    searchQuery.value = "";
+  }
+}
+function clearInput() {
+  searchQuery.value = "";
+  isSearchVisible.value = false;
 }
 
 // Togglers store
@@ -404,6 +435,10 @@ const {
   isSubMenuVisible,
   activeIndex,
 } = storeToRefs(togllersStore);
+function showSubMenu(index) {
+  isSubMenuVisible.value = true;
+  activeIndex.value = index;
+}
 
 // Categories store
 const categoriesStore = useCategories();

@@ -50,4 +50,7 @@
   -o-border-radius: 10px;
 }
 
-/* Modal Style */
+/* Scroll to top Style */
+.p-scrolltop {
+  background-color: #478c5c;
+}

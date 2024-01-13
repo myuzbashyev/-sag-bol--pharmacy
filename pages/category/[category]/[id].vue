@@ -10,6 +10,7 @@
         <ul class="flex gap-1">
           <UiCard
             v-for="item in filteredItems"
+            :id="item.id"
             :title="item.title"
             :img="item.img"
             :price="item.price"

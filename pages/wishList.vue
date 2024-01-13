@@ -1,7 +1,7 @@
 <template>
   <nuxt-layout>
     <section class="h-screen">
-      <div class="container p-10">
+      <div class="container py-10">
         <h1 class="text-2xl font-bold mb-5">
           Halanlarym ({{ favItems.length }})
         </h1>
@@ -16,6 +16,7 @@
           <ul class="flex flex-wrap gap-1">
             <UiCard
               v-for="item in favItems"
+              :id="item.id"
               :title="item.title"
               :img="item.img"
               :pharmacy="item.pharmacy"
