@@ -3,9 +3,7 @@
     <section class="h-screen">
       <div class="container py-10">
         <div class="flex justify-between mb-5">
-          <h1 class="text-2xl font-bold">
-            Sebedim ({{ shoppingCart.length }})
-          </h1>
+          <h1 class="text-2xl font-bold">Sebedim ({{ itemsCount }})</h1>
           <Button
             @click="allItemsStore.clearShoppingCart"
             icon="pi pi-trash"
@@ -25,13 +23,14 @@
             <nav>
               <ul>
                 <ShoppingItem
-                  v-for="shItem in shoppingCart"
-                  :image="shItem.img"
-                  :label="shItem.label"
-                  :title="shItem.title"
-                  :pharmacy="shItem.pharmacy"
-                  :price="shItem.price"
-                  :id="shItem.id"
+                  v-for="shoppingItem in shoppingCart"
+                  :image="shoppingItem.img"
+                  :label="shoppingItem.label"
+                  :title="shoppingItem.title"
+                  :pharmacy="shoppingItem.pharmacy"
+                  :price="shoppingItem.price"
+                  :id="shoppingItem.id"
+                  :count="shoppingItem.count"
                 ></ShoppingItem>
               </ul>
             </nav>
@@ -67,5 +66,5 @@
 import ShoppingItem from "~/components/ui/shoppingItem.vue";
 
 const allItemsStore = useAllItems();
-const { shoppingCart, sum } = storeToRefs(allItemsStore);
+const { shoppingCart, sum, itemsCount } = storeToRefs(allItemsStore);
 </script>

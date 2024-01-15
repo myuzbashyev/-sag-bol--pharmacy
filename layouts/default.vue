@@ -154,12 +154,30 @@
             </button>
           </div>
           <div
-            class="bg-white absolute top-12 w-full left-0 overflow-y-scroll h-96 rounded opacity-0 transition-opacity duration-300 ease-in-out invisible"
+            class="bg-white absolute top-12 w-full left-0 overflow-y-scroll rounded opacity-0 transition-opacity duration-300 ease-in-out invisible"
             :class="{
               'opacity-100 !visible': isSearchVisible && searchItems.length > 0,
             }"
           >
-            <SearchItems :items="searchItems"></SearchItems>
+            <nav>
+              <ul>
+                <UiSearch
+                  v-for="searchItem in searchItems"
+                  :key="searchItem.id"
+                  :id="searchItem.id"
+                  :title="searchItem.title"
+                  :price="searchItem.price"
+                  :pharmacy="searchItem.pharmacy"
+                  :route="`/category/${searchItem.category}/${searchItem.subcategory}/${searchItem.id}`"
+                  @add-to-shopping-cart="addToShoppingCart(searchItem.id)"
+                  @navigate-to-route="
+                    navigateToRoute(
+                      `/category/${searchItem.category}/${searchItem.subcategory}/${searchItem.id}`
+                    )
+                  "
+                ></UiSearch>
+              </ul>
+            </nav>
           </div>
         </span>
       </div>
@@ -413,6 +431,16 @@ function search() {
   isSearchVisible.value = true;
   allItemsStore.searchByInput(searchQuery.value);
 }
+function addToShoppingCart(id) {
+  allItemsStore.addToShoppingCart(id);
+  searchQuery.value = "";
+  // isSearchVisible.value = false;
+}
+function navigateToRoute(route) {
+  useRouter().push({ path: route });
+  isSearchVisible.value = false;
+}
+
 function navigate() {
   if (searchItems.value !== null) {
     useRouter().push({ path: "/searchPage" });

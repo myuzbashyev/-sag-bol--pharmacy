@@ -15,16 +15,22 @@
         <div class="text-center">
           <h2 class="font-bold text-lg">{{ price }} TMT</h2>
           <div class="bg-lint px-2 rounded">
-            <button @click="decrease" class="outline-none">
+            <button
+              @click="allItemsStore.decreasePrice(id)"
+              class="outline-none"
+            >
               <i class="pi pi-minus"></i>
             </button>
             <input
               type="text"
               inputmode="numeric"
-              v-model="numInput"
+              v-model="count"
               class="bg-lint text-center outline-none"
             />
-            <button @click="increase" class="outline-none">
+            <button
+              @click="allItemsStore.increasePrice(id)"
+              class="outline-none"
+            >
               <i class="pi pi-plus"></i>
             </button>
           </div>
@@ -45,17 +51,9 @@ const props = defineProps({
   pharmacy: String,
   price: Number,
   id: Number,
+  count: Number,
 });
-const { image, label, title, pharmacy, price, id } = toRefs(props);
-const numInput = ref(1);
-function increase() {
-  numInput.value += 1;
-  allItemsStore.increasePrice(id.value, numInput.value);
-}
-function decrease() {
-  allItemsStore.decreasePrice(id.value, numInput.value);
-  numInput.value >= 2 ? (numInput.value -= 1) : numInput.value;
-}
+const { image, label, title, pharmacy, price, id, count } = toRefs(props);
 
 const allItemsStore = useAllItems();
 </script>

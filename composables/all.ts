@@ -382,6 +382,11 @@ export const useAllItems = defineStore("allItems", {
         .map((item: any) => item.price)
         .reduce((a, b) => a + b, 0);
     },
+    itemsCount(): number {
+      return this.shoppingCart
+        .map((item: any) => item.count)
+        .reduce((a, b) => a + b, 0);
+    },
   },
   actions: {
     toggleFav(id: number) {
@@ -389,21 +394,31 @@ export const useAllItems = defineStore("allItems", {
       if (favItem) favItem.isFav = !favItem.isFav;
     },
     addToShoppingCart(id: number) {
-      const shoppingItem = this.items.find((item) => item.id === id);
+      const foundedItem = this.items.find((item) => item.id === id);
+      const shoppingItem = Object.assign({}, foundedItem);
       this.shoppingCart.push(shoppingItem);
+      shoppingItem.count = 1;
     },
     deleteFromShoppingCart(id: number) {
       this.shoppingCart = this.shoppingCart.filter(
         (item: any) => item.id !== id
       );
     },
-    increasePrice(id: number, input: number) {
-      const shItem = this.items.find((item) => item.id === id);
-      if (shItem) shItem.price = shItem.price * input;
+    increasePrice(id: number) {
+      const shoppingItem = this.shoppingCart.find((item) => item.id === id);
+      if (shoppingItem && this.shoppingCart.includes(shoppingItem)) {
+        shoppingItem.count += 1;
+        shoppingItem.price *= shoppingItem.count;
+      }
     },
-    decreasePrice(id: number, input: number) {
-      const shItem = this.items.find((item) => item.id === id);
-      if (shItem) shItem.price = shItem.price / input;
+    decreasePrice(id: number) {
+      const shoppingItem = this.shoppingCart.find((item) => item.id === id);
+      if (shoppingItem && this.shoppingCart.includes(shoppingItem)) {
+        shoppingItem.price /= shoppingItem.count;
+        shoppingItem.count > 1
+          ? (shoppingItem.count -= 1)
+          : (shoppingItem.count = 1);
+      }
     },
     clearShoppingCart() {
       this.shoppingCart = [];
