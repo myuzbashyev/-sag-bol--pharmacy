@@ -125,10 +125,10 @@ function addToShoppingCart(id) {
 const numInput = ref(1);
 function increase() {
   numInput.value += 1;
-  allItemsStore.increasePrice(id.value, numInput.value);
+  allItemsStore.increasePrice(id.value);
 }
 function decrease() {
-  allItemsStore.decreasePrice(id.value, numInput.value);
+  allItemsStore.decreasePrice(id.value);
   numInput.value >= 2 ? (numInput.value -= 1) : numInput.value;
 }
 </script>

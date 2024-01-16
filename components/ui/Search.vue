@@ -12,7 +12,7 @@
       </span>
       <Button
         v-if="!isAdded"
-        @click="addToShoppingCart"
+        @click="addToShoppingCart()"
         label="Sebede goş"
         icon="pi pi-shopping-bag"
         class="bg-lint text-forest-green border-none transition-colors ease-in-out hover:bg-lint-1"
@@ -36,31 +36,37 @@
 </template>
 
 <script setup>
-const emit = defineEmits(["addToShoppingCart", "navigateToRoute"]);
 const props = defineProps({
+  id: Number,
   title: String,
   price: Number,
   pharmacy: String,
+  route: String,
 });
+const { id, title, price, pharmacy, route } = toRefs(props);
 
-const { title, price, pharmacy } = toRefs(props);
+const allItemsStore = useAllItems();
+const togllersStore = useTogglers();
+const { isSearchVisible } = storeToRefs(togllersStore);
+
 const isAdded = ref(false);
 function addToShoppingCart() {
   isAdded.value = true;
-  emit("addToShoppingCart");
+  allItemsStore.addToShoppingCart(id.value);
 }
 
 const numInput = ref(1);
 function increase() {
   numInput.value += 1;
-  allItemsStore.increasePrice(id.value, numInput.value);
+  allItemsStore.increasePrice(id.value);
 }
 function decrease() {
-  allItemsStore.decreasePrice(id.value, numInput.value);
+  allItemsStore.decreasePrice(id.value);
   numInput.value >= 2 ? (numInput.value -= 1) : numInput.value;
 }
 
 function navigateToRoute() {
-  emit("navigateToRoute");
+  useRouter().push({ path: route.value });
+  isSearchVisible.value = false;
 }
 </script>

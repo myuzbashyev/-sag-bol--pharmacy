@@ -116,31 +116,28 @@
     <div
       class="container flex justify-between items-center gap-10 p-0 bg-transparent border-none relative"
     >
-      <div>
-        <button
-          class="py-2.5 px-5 rounded-lg bg-white transition-colors duration-150 ease-in-out hover:bg-lint-1 outline-none"
-          :class="{ lint: isMenuVisible }"
-          @click="
-            {
-              isMenuVisible = !isMenuVisible;
-            }
-          "
-        >
-          <i class="pi pi-th-large"></i>
-          Kategoriýalar
-        </button>
-      </div>
+      <button
+        ref="categoryButton"
+        class="py-2.5 px-5 rounded-lg bg-white transition-colors duration-150 ease-in-out hover:bg-lint-1 outline-none"
+        :class="{ lint: isMenuVisible }"
+        @click="openCategory"
+      >
+        <i class="pi pi-th-large"></i>
+        Kategoriýalar
+      </button>
       <div class="flex-1">
         <span
           class="flex items-center bg-search border rounded-xl px-5 relative"
         >
-          <InputText
+          <input
+            ref="searchInput"
             v-model="searchQuery"
+            @click="isSearchVisible = true"
             @input="search"
             @keydown.enter="navigate"
             type="text"
             placeholder="Gözleg ..."
-            class="w-full border-none bg-search placeholder:text-forest-green text-forest-green"
+            class="w-full py-2 border-none outline-none bg-search placeholder:text-forest-green text-forest-green"
           />
           <div class="flex gap-5 items-center">
             <i
@@ -159,7 +156,7 @@
               'opacity-100 !visible': isSearchVisible && searchItems.length > 0,
             }"
           >
-            <nav>
+            <nav ref="closeSearch" class="p-3">
               <ul>
                 <UiSearch
                   v-for="searchItem in searchItems"
@@ -169,14 +166,9 @@
                   :price="searchItem.price"
                   :pharmacy="searchItem.pharmacy"
                   :route="`/category/${searchItem.category}/${searchItem.subcategory}/${searchItem.id}`"
-                  @add-to-shopping-cart="addToShoppingCart(searchItem.id)"
-                  @navigate-to-route="
-                    navigateToRoute(
-                      `/category/${searchItem.category}/${searchItem.subcategory}/${searchItem.id}`
-                    )
-                  "
                 ></UiSearch>
               </ul>
+              <p class="mt-2 font-bold">Jemi: {{ searchItems.length }}</p>
             </nav>
           </div>
         </span>
@@ -232,12 +224,14 @@
 
     <!-- Сategory -->
     <nav
+      id="category"
+      ref="closeCategory"
       class="container flex absolute shadow-md py-10 overflow-y-scroll h-72 left-72 bg-white opacity-0 invisible transition-all duration-300 ease z-50"
       :class="{ 'opacity-100 !visible': isMenuVisible }"
     >
       <ul class="flex flex-col gap-2 border-r px-5 relative">
         <nuxt-link
-          @click="isMenuVisible = !isMenuVisible"
+          @click="isMenuVisible = false"
           :to="`/${category.category}`"
           class="flex justify-between items-center border rounded-md px-3 py-1 transition-colors ease-in-out border-emerald-green hover:bg-lint-1"
           v-for="(category, index) in categories"
@@ -270,8 +264,10 @@
         </nuxt-link>
       </ul>
     </nav>
+
     <!-- Sign in  -->
     <SignIn
+      ref="closeSignIn"
       :class="{ 'opacity-100 !visible': isSignInOpen }"
       @close-menu="isSignInOpen = false"
     ></SignIn>
@@ -426,19 +422,12 @@
 // All items store
 const allItemsStore = useAllItems();
 const { searchItems } = storeToRefs(allItemsStore);
+
+// Search
 const searchQuery = ref("");
 function search() {
   isSearchVisible.value = true;
   allItemsStore.searchByInput(searchQuery.value);
-}
-function addToShoppingCart(id) {
-  allItemsStore.addToShoppingCart(id);
-  searchQuery.value = "";
-  // isSearchVisible.value = false;
-}
-function navigateToRoute(route) {
-  useRouter().push({ path: route });
-  isSearchVisible.value = false;
 }
 
 function navigate() {
@@ -450,6 +439,7 @@ function navigate() {
 }
 function clearInput() {
   searchQuery.value = "";
+  allItemsStore.clearSearch();
   isSearchVisible.value = false;
 }
 
@@ -471,10 +461,47 @@ function showSubMenu(index) {
 // Categories store
 const categoriesStore = useCategories();
 const { categories } = storeToRefs(categoriesStore);
+function openCategory() {
+  isMenuVisible.value = true;
+}
 
 // Date for header
 const headerDate = new Date().toLocaleDateString();
 
 // Year for footer
 const footerYear = new Date().getFullYear();
+
+// Close element on click outside
+const closeSearch = ref(null);
+const categoryButton = ref(null);
+const closeCategory = ref(null);
+const searchInput = ref(null);
+
+onMounted(() => {
+  const closeCategoryOnOutsideClick = (event) => {
+    if (
+      closeCategory.value &&
+      !closeCategory.value.contains(event.target) &&
+      !categoryButton.value.contains(event.target)
+    ) {
+      isMenuVisible.value = false;
+    }
+  };
+  const closeSearchOnOutsideClick = (event) => {
+    if (
+      closeSearch.value &&
+      !closeSearch.value.contains(event.target) &&
+      !searchInput.value.contains(event.target)
+    ) {
+      isSearchVisible.value = false;
+    }
+  };
+
+  document.addEventListener("click", closeSearchOnOutsideClick);
+  document.addEventListener("click", closeCategoryOnOutsideClick);
+  return () => {
+    document.removeEventListener("click", closeSearchOnOutsideClick);
+    document.removeEventListener("click", closeCategoryOnOutsideClick);
+  };
+});
 </script>

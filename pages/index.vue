@@ -1,10 +1,6 @@
 <template>
   <nuxt-layout>
-    <div
-      :class="{
-        'blur overflow-hidden': isSignInOpen || isMenuVisible,
-      }"
-    >
+    <div>
       <section class="mt-5">
         <div class="container">
           <Galleria

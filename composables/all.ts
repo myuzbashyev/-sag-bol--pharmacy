@@ -423,6 +423,9 @@ export const useAllItems = defineStore("allItems", {
     clearShoppingCart() {
       this.shoppingCart = [];
     },
+    clearSearch() {
+      this.search = [];
+    },
     searchByInput(input: string) {
       if (input !== "") {
         let searchItem = this.items.filter((item) =>
