@@ -3,6 +3,7 @@
     <div>
       <section class="mt-5">
         <div class="container">
+          <!-- Images -->
           <Galleria
             :value="images"
             :numVisible="5"
@@ -28,6 +29,8 @@
           </Galleria>
         </div>
       </section>
+
+      <!-- Saglyk we derman -->
       <section class="container py-16">
         <nuxt-link
           to="/category/medicine"
@@ -37,6 +40,7 @@
         <items class="mt-5 flex-wrap" :goods="medicine" />
       </section>
 
+      <!-- Lukmancylyk enjamlary -->
       <section class="container">
         <nuxt-link
           to="/category/doctor"
@@ -46,6 +50,8 @@
         >
         <items class="mt-5 flex-wrap" :goods="doctor" />
       </section>
+
+      <!-- Mayyp adamlar ucin -->
       <section class="container py-16">
         <nuxt-link
           to="/category/disabilities"
@@ -54,6 +60,9 @@
         >
         <items class="mt-5 flex-wrap" :goods="disabilities" />
       </section>
+
+      <!-- Sign In -->
+
       <ScrollTop></ScrollTop>
     </div>
   </nuxt-layout>
@@ -66,7 +75,7 @@ const { medicine, doctor, disabilities } = storeToRefs(allItemsStore);
 
 // Togglers store
 const togglersStore = useTogglers();
-const { isSignInOpen, isMenuVisible } = storeToRefs(togglersStore);
+const { isSignInOpen, signInButton } = storeToRefs(togglersStore);
 
 // Images store
 const imagesStore = useImages();

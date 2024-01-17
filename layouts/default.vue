@@ -1,5 +1,5 @@
 <template>
-  <section class="text-forest-green bg-lint p-2">
+  <header class="text-forest-green bg-lint p-2">
     <div
       class="container flex justify-between items-center p-0 bg-transparent border-none"
     >
@@ -108,9 +108,9 @@
         </nav>
       </div>
     </div>
-  </section>
+  </header>
 
-  <header
+  <section
     class="p-2 text-forest-green sticky top-0 bg-white shadow-md z-10 transition-all duration-150 ease-in-out"
   >
     <div
@@ -120,7 +120,7 @@
         ref="categoryButton"
         class="py-2.5 px-5 rounded-lg bg-white transition-colors duration-150 ease-in-out hover:bg-lint-1 outline-none"
         :class="{ lint: isMenuVisible }"
-        @click="openCategory"
+        @click="openToggler('isMenuVisible')"
       >
         <i class="pi pi-th-large"></i>
         Kategoriýalar
@@ -150,6 +150,8 @@
               <i class="pi pi-search" style="color: #478c5c"></i>
             </button>
           </div>
+
+          <!-- Search div -->
           <div
             class="bg-white absolute top-12 w-full left-0 overflow-y-scroll rounded opacity-0 transition-opacity duration-300 ease-in-out invisible"
             :class="{
@@ -183,8 +185,9 @@
             ></i>
           </nuxt-link>
           <button
+            ref="signInButton"
             class="flex gap-1 cursor-pointer"
-            @click="isSignInOpen = !isSignInOpen"
+            @click="openToggler('isSignInOpen')"
           >
             Içeri gir
             <i
@@ -222,65 +225,62 @@
       </div>
     </div>
 
-    <!-- Сategory -->
-    <nav
-      id="category"
-      ref="closeCategory"
-      class="container flex absolute shadow-md py-10 overflow-y-scroll h-72 left-72 bg-white opacity-0 invisible transition-all duration-300 ease z-50"
+    <!-- Сategory div -->
+    <div
+      class="absolute left-0 right-0 h-screen backdrop-blur opacity-0 invisible transition-opacity duration-300 ease-in-out"
       :class="{ 'opacity-100 !visible': isMenuVisible }"
     >
-      <ul class="flex flex-col gap-2 border-r px-5 relative">
-        <nuxt-link
-          @click="isMenuVisible = false"
-          :to="`/${category.category}`"
-          class="flex justify-between items-center border rounded-md px-3 py-1 transition-colors ease-in-out border-emerald-green hover:bg-lint-1"
-          v-for="(category, index) in categories"
-          :key="index"
-          @mouseover="showSubMenu(index)"
-        >
-          <span class="flex gap-1 hover:text-emerald-green">
-            <img :src="category.icon" alt="Category icon" />
-            {{ category?.label }}
-          </span>
-          <i class="pi pi-chevron-right"></i>
-          <ul
-            v-if="isSubMenuVisible && index === activeIndex"
-            class="flex flex-col gap-2 absolute left-80 top-0 w-full"
+      <nav
+        ref="categoryContainer"
+        class="container flex absolute shadow-md py-10 overflow-y-scroll h-72 left-0 right-0 bg-white"
+      >
+        <ul class="flex flex-col gap-2 border-r px-5 relative">
+          <nuxt-link
+            @click="closeToggler('isMenuVisible')"
+            :to="`/${category.category}`"
+            class="flex justify-between items-center border rounded-md px-3 py-1 transition-colors ease-in-out border-emerald-green hover:bg-lint-1"
+            v-for="(category, index) in categories"
+            :key="index"
+            @mouseover="showSubMenu(index)"
           >
-            <h1
-              class="text-xl font-bold transition-colors ease-in-out hover:text-emerald-green"
+            <span class="flex gap-1 hover:text-emerald-green">
+              <img :src="category.icon" alt="Category icon" />
+              {{ category?.label }}
+            </span>
+            <i class="pi pi-chevron-right"></i>
+            <ul
+              v-if="isSubMenuVisible && index === activeIndex"
+              class="flex flex-col gap-2 absolute left-80 top-0 w-full"
             >
-              {{ category.label }}
-            </h1>
-            <nuxt-link
-              :to="`/${category.category}/${subCategory.subcategory}`"
-              class="transition-colors ease-in-out hover:text-emerald-green"
-              v-for="(subCategory, subIndex) in category.items"
-              :key="subIndex"
-            >
-              {{ subCategory.title }}
-            </nuxt-link>
-          </ul>
-        </nuxt-link>
-      </ul>
-    </nav>
-
-    <!-- Sign in  -->
-    <SignIn
-      ref="closeSignIn"
+              <h1
+                class="text-xl font-bold transition-colors ease-in-out hover:text-emerald-green"
+              >
+                {{ category.label }}
+              </h1>
+              <nuxt-link
+                :to="`/${category.category}/${subCategory.subcategory}`"
+                class="transition-colors ease-in-out hover:text-emerald-green"
+                v-for="(subCategory, subIndex) in category.items"
+                :key="subIndex"
+              >
+                {{ subCategory.title }}
+              </nuxt-link>
+            </ul>
+          </nuxt-link>
+        </ul>
+      </nav>
+    </div>
+    <div
+      ref="signIn"
+      class="bg-black/30 fixed top-0 left-0 right-0 h-screen z-20 opacity-0 invisible transition-opacity duration-300 ease-in-out"
       :class="{ 'opacity-100 !visible': isSignInOpen }"
-      @close-menu="isSignInOpen = false"
-    ></SignIn>
-
-    <!-- Sidebar -->
-    <!-- <Sidebar
-      :class="{ 'translate-x-0': isSidebarVisible }"
-      @close-sidebar="isSidebarVisible = false"
-      @open-sign-in="isSignInOpen = !isSignInOpen"
-    ></Sidebar> -->
-  </header>
+    >
+      <SignIn @close-menu="closeToggler('isSignInOpen')"></SignIn>
+    </div>
+  </section>
 
   <slot />
+
   <!-- footer -->
   <footer class="bg-lint">
     <div class="container flex flex-wrap py-10">
@@ -442,6 +442,8 @@ function clearInput() {
   allItemsStore.clearSearch();
   isSearchVisible.value = false;
 }
+const closeSearch = ref(null);
+const searchInput = ref(null);
 
 // Togglers store
 const togllersStore = useTogglers();
@@ -458,12 +460,28 @@ function showSubMenu(index) {
   activeIndex.value = index;
 }
 
+// Sign In
+const signIn = ref(null);
+const signInButton = ref(null);
+
+function openToggler(toggler) {
+  const togglerName = eval(toggler);
+  togglerName.value = true;
+  document.body.classList.add("overflow-hidden");
+}
+function closeToggler(toggler) {
+  const togglerName = eval(toggler);
+  togglerName.value = false;
+  document.body.classList.contains("overflow-hidden")
+    ? document.body.classList.remove("overflow-hidden")
+    : "";
+}
+
 // Categories store
 const categoriesStore = useCategories();
 const { categories } = storeToRefs(categoriesStore);
-function openCategory() {
-  isMenuVisible.value = true;
-}
+const categoryButton = ref(null);
+const categoryContainer = ref(null);
 
 // Date for header
 const headerDate = new Date().toLocaleDateString();
@@ -471,20 +489,14 @@ const headerDate = new Date().toLocaleDateString();
 // Year for footer
 const footerYear = new Date().getFullYear();
 
-// Close element on click outside
-const closeSearch = ref(null);
-const categoryButton = ref(null);
-const closeCategory = ref(null);
-const searchInput = ref(null);
-
 onMounted(() => {
   const closeCategoryOnOutsideClick = (event) => {
     if (
-      closeCategory.value &&
-      !closeCategory.value.contains(event.target) &&
+      categoryContainer.value &&
+      !categoryContainer.value.contains(event.target) &&
       !categoryButton.value.contains(event.target)
     ) {
-      isMenuVisible.value = false;
+      closeToggler("isMenuVisible");
     }
   };
   const closeSearchOnOutsideClick = (event) => {
@@ -496,12 +508,24 @@ onMounted(() => {
       isSearchVisible.value = false;
     }
   };
+  const closeSignInOnOutsideClick = (event) => {
+    if (
+      signIn.value &&
+      signIn.value.contains(event.target) &&
+      !signInButton.value.contains(event.target)
+    ) {
+      closeToggler("isSignInOpen");
+    }
+  };
 
   document.addEventListener("click", closeSearchOnOutsideClick);
   document.addEventListener("click", closeCategoryOnOutsideClick);
+  document.addEventListener("click", closeSignInOnOutsideClick);
+
   return () => {
     document.removeEventListener("click", closeSearchOnOutsideClick);
     document.removeEventListener("click", closeCategoryOnOutsideClick);
+    document.removeEventListener("click", closeSignInOnOutsideClick);
   };
 });
 </script>

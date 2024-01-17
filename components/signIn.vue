@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white text-forest-green shadow-md p-10 rounded-xl absolute left-1/2 top-96 -translate-x-1/2 -translate-y-1/2 z-50 opacity-0 invisible transition-opacity duration-300 ease-in-out"
+    class="bg-white text-forest-green shadow-md p-10 rounded-xl fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30"
   >
     <h1 class="text-center text-xl mb-2">Hoş geldiňiz</h1>
     <p class="text-center text-lg mb-5" v-if="isRegistered">Agza Bol</p>

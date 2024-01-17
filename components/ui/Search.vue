@@ -1,15 +1,9 @@
 <template>
-  <div class="p-3 flex items-center border-b">
-    <div class="flex-1 cursor-pointer" @click="navigateToRoute">
-      <h1>{{ title }}</h1>
-      <div class="flex justify-between items-center mt-2">
-        <p class="bg-lint py-2 px-5 rounded-lg">{{ pharmacy }}</p>
-      </div>
-    </div>
-    <div class="flex gap-5 items-center">
-      <span class="flex gap-3 items-center">
-        <p class="font-bold">{{ price }} TMT</p>
-      </span>
+  <div class="p-3 border-b" @click="navigateToRoute">
+    <h1>{{ title }}</h1>
+    <div class="flex justify-between items-center mt-5">
+      <p class="bg-lint py-2 px-5 rounded-lg">{{ pharmacy }}</p>
+      <p class="font-bold">{{ price }} TMT</p>
       <Button
         v-if="!isAdded"
         @click="addToShoppingCart()"
