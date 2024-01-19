@@ -1,28 +1,38 @@
 <template>
-  <div class="p-3 border-b" @click="navigateToRoute">
-    <h1>{{ title }}</h1>
-    <div class="flex justify-between items-center mt-5">
-      <p class="bg-lint py-2 px-5 rounded-lg">{{ pharmacy }}</p>
-      <p class="font-bold">{{ price }} TMT</p>
-      <Button
-        v-if="!isAdded"
-        @click="addToShoppingCart()"
-        label="Sebede goş"
-        icon="pi pi-shopping-bag"
-        class="bg-lint text-forest-green border-none transition-colors ease-in-out hover:bg-lint-1"
-      ></Button>
-      <div v-else class="bg-lint px-2 rounded">
-        <button @click="decrease" class="outline-none">
-          <i class="pi pi-minus"></i>
-        </button>
-        <input
-          type="text"
-          inputmode="numeric"
-          v-model="numInput"
-          class="bg-lint text-center outline-none w-24"
-        />
-        <button @click="increase" class="outline-none">
-          <i class="pi pi-plus"></i>
+  <div class="p-3 border-b">
+    <div class="flex justify-center gap-2 items-center">
+      <div class="flex-1" @click="navigateToRoute">
+        <h1 class="text-sm xl:text-base">{{ title }}</h1>
+        <p
+          class="bg-lint text-sm xl:text-base py-2 px-5 mt-2 rounded-lg inline-block"
+        >
+          {{ pharmacy }}
+        </p>
+      </div>
+      <div class="block text-center 2xl:flex items-center gap-5">
+        <p class="font-bold mb-2 2xl:m-0">{{ price }} TMT</p>
+        <div v-if="isAdded" class="bg-lint px-2 rounded">
+          <button @click="decrease" class="outline-none">
+            <i class="pi pi-minus"></i>
+          </button>
+          <input
+            type="text"
+            inputmode="numeric"
+            v-model="numInput"
+            class="bg-lint text-sm xl:text-base text-center outline-none w-28"
+          />
+          <button @click="increase" class="outline-none">
+            <i class="pi pi-plus"></i>
+          </button>
+        </div>
+        <button
+          ref="shoppingButton"
+          v-else
+          @click="addToShoppingCart()"
+          class="bg-lint py-2 px-5 rounded-lg text-sm xl:text-base text-forest-green border-none transition-colors ease-in-out hover:bg-lint-1"
+        >
+          Sebede goş
+          <i class="pi pi-shopping-bag"></i>
         </button>
       </div>
     </div>
@@ -41,7 +51,7 @@ const { id, title, price, pharmacy, route } = toRefs(props);
 
 const allItemsStore = useAllItems();
 const togllersStore = useTogglers();
-const { isSearchVisible } = storeToRefs(togllersStore);
+const { isSearchVisible, shoppingButton } = storeToRefs(togllersStore);
 
 const isAdded = ref(false);
 function addToShoppingCart() {

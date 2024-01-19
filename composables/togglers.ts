@@ -6,5 +6,6 @@ export const useTogglers = defineStore("togglers", {
     isMenuVisible: false,
     isSubMenuVisible: false,
     activeIndex: null,
+    shoppingButton: false,
   }),
 });

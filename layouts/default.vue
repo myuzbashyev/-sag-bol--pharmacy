@@ -1,7 +1,7 @@
 <template>
   <header class="text-forest-green bg-lint p-2">
     <div
-      class="container flex justify-between items-center p-0 bg-transparent border-none"
+      class="xl:w-9/12 mx-auto flex justify-between items-center p-0 bg-transparent border-none"
     >
       <div>
         <nuxt-link class="flex" to="/">
@@ -114,7 +114,7 @@
     class="p-2 text-forest-green sticky top-0 bg-white shadow-md z-10 transition-all duration-150 ease-in-out"
   >
     <div
-      class="container flex justify-between items-center gap-10 p-0 bg-transparent border-none relative"
+      class="px-3 xl:w-9/12 mx-auto flex justify-between items-center gap-10 p-0 bg-transparent border-none relative"
     >
       <button
         ref="categoryButton"
@@ -176,7 +176,7 @@
         </span>
       </div>
 
-      <div>
+      <div class="hidden lg:block">
         <ul class="flex gap-5">
           <nuxt-link to="/">
             <i
@@ -212,17 +212,17 @@
           ></nuxt-link>
 
           <!-- Sidebar button -->
-          <!-- <button
-            class="flex gap-1 cursor-pointer"
-            @click="isSidebarVisible = !isSidebarVisible"
-          >
-            <i
-              class="pi pi-align-right"
-              style="font-size: 1.3rem; color: #478c5c"
-            ></i>
-          </button> -->
         </ul>
       </div>
+      <button
+        class="flex lg:hidden gap-1 cursor-pointer"
+        @click="isSidebarVisible = !isSidebarVisible"
+      >
+        <i
+          class="pi pi-align-right"
+          style="font-size: 1.3rem; color: #478c5c"
+        ></i>
+      </button>
     </div>
 
     <!-- Сategory div -->
@@ -232,7 +232,7 @@
     >
       <nav
         ref="categoryContainer"
-        class="container flex absolute shadow-md py-10 overflow-y-scroll h-72 left-0 right-0 bg-white"
+        class="xl:w-9/12 mx-auto flex absolute shadow-md py-10 overflow-y-scroll h-72 left-0 right-0 bg-white"
       >
         <ul class="flex flex-col gap-2 border-r px-5 relative">
           <nuxt-link
@@ -454,6 +454,7 @@ const {
   isMenuVisible,
   isSubMenuVisible,
   activeIndex,
+  shoppingButton,
 } = storeToRefs(togllersStore);
 function showSubMenu(index) {
   isSubMenuVisible.value = true;
@@ -503,7 +504,8 @@ onMounted(() => {
     if (
       closeSearch.value &&
       !closeSearch.value.contains(event.target) &&
-      !searchInput.value.contains(event.target)
+      !searchInput.value.contains(event.target) &&
+      !shoppingButton.value.contains(event.target)
     ) {
       isSearchVisible.value = false;
     }

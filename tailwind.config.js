@@ -3,6 +3,11 @@ export default {
   content: [],
   theme: {
     extend: {
+      screens: {
+        xs: "640px",
+        sm: "768px",
+        md: "960px",
+      },
       colors: {
         "forest-green": "#013A20",
         "emerald-green": "#478C5C",
