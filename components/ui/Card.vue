@@ -1,6 +1,6 @@
 <template>
   <li
-    class="border flex flex-col justify-between rounded p-5 shadow-md w-80 bg-white"
+    class="border flex flex-col justify-between rounded p-2 w-32 xs:w-72 md:w-80 md:p-5 bg-white"
   >
     <nuxt-link :to="`${route}`">
       <div>
@@ -12,10 +12,14 @@
     </nuxt-link>
     <div>
       <div>
-        <div class="flex justify-between items-center mt-3">
-          <p class="font-bold text-forest-green text-lg">{{ price }} TMT</p>
+        <div
+          class="flex flex-col xs:flex-row justify-between items-center gap-3 mt-3"
+        >
+          <p class="font-bold text-forest-green text-lg order-2">
+            {{ price }} TMT
+          </p>
           <span
-            class="bg-lint py-3 px-5 text-forest-green rounded-md transition-colors ease-in-out hover:bg-lint-1"
+            class="bg-lint p-1 text-forest-green rounded-md transition-colors ease-in-out hover:bg-lint-1"
             >{{ pharmacy }}</span
           >
         </div>

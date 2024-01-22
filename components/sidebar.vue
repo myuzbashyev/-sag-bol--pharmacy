@@ -4,7 +4,7 @@
   >
     <ul class="flex flex-col">
       <nuxt-link
-        @click="closeSidebar"
+        @click="isSidebarVisible = false"
         to="/"
         class="flex gap-2 items-center border-b border-emerald-green mb-5"
       >
@@ -87,8 +87,10 @@
 
       <nuxt-link
         @click="
-          closeSidebar();
-          openSignIn();
+          {
+            isSidebarVisible = false;
+            isSignInOpen = true;
+          }
         "
         to="/"
         class="p-3 transition-hover ease-in-out hover:border-l-2 border-emerald-green hover:shadow-sm"
@@ -97,7 +99,7 @@
         Içeri gir</nuxt-link
       >
       <nuxt-link
-        @click="closeSidebar()"
+        @click="isSidebarVisible = false"
         to="/aboutMedicine"
         class="p-3 transition-hover ease-in-out hover:border-l-2 border-emerald-green hover:shadow-sm"
       >
@@ -105,7 +107,7 @@
         Lukmançylyk hakda
       </nuxt-link>
       <nuxt-link
-        @click="closeSidebar"
+        @click="isSidebarVisible = false"
         to="/aboutUs"
         class="p-3 transition-hover ease-in-out hover:border-l-2 border-emerald-green hover:shadow-sm"
       >
@@ -114,7 +116,7 @@
       >
 
       <nuxt-link
-        @click="closeSidebar"
+        @click="isSidebarVisible = false"
         to="/delivery"
         class="p-3 transition-hover ease-in-out hover:border-l-2 border-emerald-green hover:shadow-sm"
       >
@@ -122,7 +124,7 @@
         Eltip bermek we tölemek</nuxt-link
       >
       <nuxt-link
-        @click="closeSidebar"
+        @click="isSidebarVisible = false"
         to="/privacyPolicy"
         class="p-3 transition-hover ease-in-out hover:border-l-2 border-emerald-green hover:shadow-sm"
       >
@@ -130,7 +132,7 @@
         Ulanyş düzgünleri we gizlinlik ýörelgesi</nuxt-link
       >
       <nuxt-link
-        @click="closeSidebar"
+        @click="isSidebarVisible = false"
         to="/"
         class="p-3 transition-hover ease-in-out hover:border-l-2 border-emerald-green hover:shadow-sm"
       >
@@ -140,20 +142,11 @@
     </ul>
     <i
       class="pi pi-times-circle absolute top-1 right-1 text-2xl cursor-pointer"
-      @click="closeSidebar"
+      @click="isSidebarVisible = false"
     ></i>
   </nav>
 </template>
-<script>
-export default {
-  emits: ["closeSidebar", "openSignIn"],
-  methods: {
-    closeSidebar() {
-      this.$emit("closeSidebar");
-    },
-    openSignIn() {
-      this.$emit("openSignIn");
-    },
-  },
-};
+<script setup>
+const togglersStore = useTogglers();
+const { isSidebarVisible, isSignInOpen } = storeToRefs(togglersStore);
 </script>

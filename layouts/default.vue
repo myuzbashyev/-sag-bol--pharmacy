@@ -77,7 +77,7 @@
               />
             </g>
           </svg>
-          <div>
+          <div class="hidden xs:block">
             <h4 class="font-bold">SAG-BOL</h4>
             <p class="text-sm">Iň amatly bahadan tap!</p>
           </div>
@@ -118,12 +118,20 @@
     >
       <button
         ref="categoryButton"
-        class="py-2.5 px-5 rounded-lg bg-white transition-colors duration-150 ease-in-out hover:bg-lint-1 outline-none"
+        class="py-2.5 px-5 rounded-lg bg-white transition-colors duration-150 ease-in-out hover:bg-lint-1 outline-none hidden lg:block"
         :class="{ lint: isMenuVisible }"
         @click="openToggler('isMenuVisible')"
       >
         <i class="pi pi-th-large"></i>
         Kategoriýalar
+      </button>
+      <button
+        ref="categoryButton"
+        class="py-2.5 px-5 rounded-lg bg-white transition-colors duration-150 ease-in-out hover:bg-lint-1 outline-none hidden xs:block lg:hidden"
+        :class="{ lint: isMenuVisible }"
+        @click="openToggler('isMenuVisible')"
+      >
+        <i class="pi pi-th-large text-lg text-emerald-green"></i>
       </button>
       <div class="flex-1">
         <span
@@ -215,8 +223,9 @@
         </ul>
       </div>
       <button
-        class="flex lg:hidden gap-1 cursor-pointer"
-        @click="isSidebarVisible = !isSidebarVisible"
+        ref="sidebarButton"
+        class="hidden xs:block lg:hidden gap-1 cursor-pointer"
+        @click="openToggler('isSidebarVisible')"
       >
         <i
           class="pi pi-align-right"
@@ -227,7 +236,7 @@
 
     <!-- Сategory div -->
     <div
-      class="absolute left-0 right-0 h-screen backdrop-blur opacity-0 invisible transition-opacity duration-300 ease-in-out"
+      class="hidden xs:block absolute left-0 right-0 h-screen backdrop-blur opacity-0 invisible transition-opacity duration-300 ease-in-out"
       :class="{ 'opacity-100 !visible': isMenuVisible }"
     >
       <nav
@@ -270,6 +279,28 @@
         </ul>
       </nav>
     </div>
+
+    <!-- Mobile Category div -->
+    <div
+      class="h-screen bg-white fixed top-0 bottom-0 left-0 right-0 py-5 opacity-0 invisible transition-opacity duration-300 ease-in-out xs:hidden"
+      :class="{ 'opacity-100 !visible': isMenuVisible }"
+    >
+      <nav>
+        <ul class="flex py-10 px-3 gap-2 flex-col">
+          <nuxt-link
+            v-for="category in categories"
+            :to="`/${category.category}`"
+            class="flex justify-between items-center text-xl border rounded-lg border-emerald-green p-1"
+            >{{ category.label }} <i class="pi pi-chevron-right"></i
+          ></nuxt-link>
+        </ul>
+      </nav>
+      <i
+        class="absolute text-emerald-green p-1 top-2 right-2 rounded-full border border-emerald-green pi pi-times"
+        @click="closeToggler('isMenuVisible')"
+      ></i>
+    </div>
+    <!-- Sign In div -->
     <div
       ref="signIn"
       class="bg-black/30 fixed top-0 left-0 right-0 h-screen z-20 opacity-0 invisible transition-opacity duration-300 ease-in-out"
@@ -277,12 +308,22 @@
     >
       <SignIn @close-menu="closeToggler('isSignInOpen')"></SignIn>
     </div>
+
+    <div
+      ref="sidebarContainer"
+      class="bg-black/30 fixed top-0 bottom-0 left-0 right-0 h-screen opacity-0 invisible transition-opacity duration-300 ease-in-out"
+      :class="{ 'opacity-100 !visible': isSidebarVisible }"
+    >
+      <Sidebar :class="{ 'translate-x-0': isSidebarVisible }"></Sidebar>
+    </div>
+    <ScrollTop></ScrollTop>
   </section>
 
   <slot />
 
   <!-- footer -->
-  <footer class="bg-lint">
+
+  <footer class="bg-lint hidden xs:block">
     <div class="container flex flex-wrap py-10">
       <div class="flex w-1/3">
         <svg
@@ -416,6 +457,24 @@
       </p>
     </div>
   </footer>
+  <footer class="bg-lint px-3 py-2 sticky bottom-0 xs:hidden">
+    <nav>
+      <ul class="flex justify-between">
+        <li @click="openToggler('isMenuVisible')" ref="mobileCategory">
+          <i class="pi pi-th-large text-2xl text-emerald-green"></i>
+        </li>
+        <nuxt-link to="/wishList"
+          ><i class="pi pi-heart text-2xl text-emerald-green"></i
+        ></nuxt-link>
+        <nuxt-link to="/shoppingCart"
+          ><i class="pi pi-shopping-cart text-2xl text-emerald-green"></i
+        ></nuxt-link>
+        <li @click="openToggler('isSidebarVisible')">
+          <i class="pi pi-align-right text-2xl text-emerald-green"></i>
+        </li>
+      </ul>
+    </nav>
+  </footer>
 </template>
 
 <script setup>
@@ -477,12 +536,16 @@ function closeToggler(toggler) {
     ? document.body.classList.remove("overflow-hidden")
     : "";
 }
+// Sidebar
+const sidebarButton = ref(null);
+const sidebarContainer = ref(null);
 
 // Categories store
 const categoriesStore = useCategories();
 const { categories } = storeToRefs(categoriesStore);
 const categoryButton = ref(null);
 const categoryContainer = ref(null);
+const mobileCategory = ref(null);
 
 // Date for header
 const headerDate = new Date().toLocaleDateString();
@@ -495,7 +558,8 @@ onMounted(() => {
     if (
       categoryContainer.value &&
       !categoryContainer.value.contains(event.target) &&
-      !categoryButton.value.contains(event.target)
+      !categoryButton.value.contains(event.target) &&
+      !mobileCategory.value.contains(event.target)
     ) {
       closeToggler("isMenuVisible");
     }
@@ -519,15 +583,26 @@ onMounted(() => {
       closeToggler("isSignInOpen");
     }
   };
+  const closeSidebarOnOutsideClick = (event) => {
+    if (
+      sidebarContainer.value &&
+      !sidebarButton.value.contains(event.target) &&
+      sidebarContainer.value.contains(event.target)
+    ) {
+      closeToggler("isSidebarVisible");
+    }
+  };
 
   document.addEventListener("click", closeSearchOnOutsideClick);
   document.addEventListener("click", closeCategoryOnOutsideClick);
   document.addEventListener("click", closeSignInOnOutsideClick);
+  document.addEventListener("click", closeSidebarOnOutsideClick);
 
   return () => {
     document.removeEventListener("click", closeSearchOnOutsideClick);
     document.removeEventListener("click", closeCategoryOnOutsideClick);
     document.removeEventListener("click", closeSignInOnOutsideClick);
+    document.removeEventListener("click", closeSidebarOnOutsideClick);
   };
 });
 </script>

@@ -2,7 +2,7 @@
   <div class="p-3 border-b">
     <div class="flex justify-center gap-2 items-center">
       <div class="flex-1" @click="navigateToRoute">
-        <h1 class="text-sm xl:text-base">{{ title }}</h1>
+        <h1 class="">{{ title }}</h1>
         <p
           class="bg-lint text-sm xl:text-base py-2 px-5 mt-2 rounded-lg inline-block"
         >
@@ -19,7 +19,7 @@
             type="text"
             inputmode="numeric"
             v-model="numInput"
-            class="bg-lint text-sm xl:text-base text-center outline-none w-28"
+            class="bg-lint text-center outline-none w-28"
           />
           <button @click="increase" class="outline-none">
             <i class="pi pi-plus"></i>
@@ -29,7 +29,7 @@
           ref="shoppingButton"
           v-else
           @click="addToShoppingCart()"
-          class="bg-lint py-2 px-5 rounded-lg text-sm xl:text-base text-forest-green border-none transition-colors ease-in-out hover:bg-lint-1"
+          class="bg-lint py-2 px-5 rounded-lg text-forest-green border-none transition-colors ease-in-out hover:bg-lint-1"
         >
           Sebede goş
           <i class="pi pi-shopping-bag"></i>
