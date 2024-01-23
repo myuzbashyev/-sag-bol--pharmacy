@@ -1,30 +1,29 @@
 <template>
   <li
-    class="border flex flex-col justify-between rounded p-2 w-32 xs:w-72 md:w-80 md:p-5 bg-white"
+    class="flex flex-col justify-between border shadow p-3 gap-5 w-32 sx:w-52"
   >
     <nuxt-link :to="`${route}`">
-      <div>
-        <div class="border rounded flex justify-center py-10">
-          <img :src="img" />
-        </div>
-        <h1 class="mt-3 text-forest-green text-sm">{{ title }}</h1>
-      </div>
+      <span class="border flex justify-center p-2"
+        ><img :src="img" class="w-20 h-20"
+      /></span>
+      <h1
+        class="mt-3 text-forest-green text-sm overflow-hidden text-ellipsis line-clamp-2 break-words"
+      >
+        {{ title }}
+      </h1>
     </nuxt-link>
+
     <div>
-      <div>
-        <div
-          class="flex flex-col xs:flex-row justify-between items-center gap-3 mt-3"
+      <span class="flex flex-col xs:flex-row justify-between gap-1">
+        <p class="font-bold text-forest-green text-lg order-2 text-center">
+          {{ price }} TMT
+        </p>
+        <span
+          class="bg-lint text-sm p-1 text-forest-green rounded-md transition-colors ease-in-out hover:bg-lint-1 text-center"
+          >{{ pharmacy }}</span
         >
-          <p class="font-bold text-forest-green text-lg order-2">
-            {{ price }} TMT
-          </p>
-          <span
-            class="bg-lint p-1 text-forest-green rounded-md transition-colors ease-in-out hover:bg-lint-1"
-            >{{ pharmacy }}</span
-          >
-        </div>
-      </div>
-      <div class="flex gap-2 mt-3">
+      </span>
+      <div class="flex gap-2 mt-5">
         <Button
           @click="allItemsStore.toggleFav(id)"
           :icon="isFav ? 'pi pi-heart-fill' : 'pi pi-heart'"

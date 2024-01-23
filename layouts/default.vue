@@ -324,8 +324,10 @@
   <!-- footer -->
 
   <footer class="bg-lint hidden xs:block">
-    <div class="container flex flex-wrap py-10">
-      <div class="flex w-1/3">
+    <div
+      class="mx-3 xl:w-9/12 xl:mx-auto flex flex-wrap py-10 gap-5 2xl:gap-16"
+    >
+      <div class="flex flex-grow h-full">
         <svg
           class="mr-2"
           height="50px"
@@ -404,52 +406,50 @@
         </span>
       </div>
 
-      <nav class="flex justify-between gap-10 flex-1">
-        <ul class="flex flex-col">
-          <h1 class="font-bold text-lg mb-1">Biz barada</h1>
-          <nuxt-link
-            to="/aboutUs"
-            class="cursor-pointer text-md mb-1 hover:text-emerald-green transition-colors ease-in-out"
-          >
-            Biz barada
-          </nuxt-link>
-          <nuxt-link
-            to="/delivery"
-            class="cursor-pointer text-md mb-1 hover:text-emerald-green transition-colors ease-in-out"
-          >
-            Eltip bermek we tölemek
-          </nuxt-link>
-          <nuxt-link
-            to="/privacyPolicy"
-            class="cursor-pointer text-md mb-1 hover:text-emerald-green transition-colors ease-in-out"
-          >
-            Ulanyş düzgünleri we gizlinlik ýörelgesi
-          </nuxt-link>
-          <nuxt-link
-            to="/partnership"
-            class="cursor-pointer text-md hover:text-emerald-green transition-colors ease-in-out"
-          >
-            Hyzmatdaşlyk
-          </nuxt-link>
-        </ul>
+      <ul class="flex flex-col">
+        <h1 class="font-bold text-lg mb-1">Biz barada</h1>
+        <nuxt-link
+          to="/aboutUs"
+          class="cursor-pointer text-md mb-1 hover:text-emerald-green transition-colors ease-in-out"
+        >
+          Biz barada
+        </nuxt-link>
+        <nuxt-link
+          to="/delivery"
+          class="cursor-pointer text-md mb-1 hover:text-emerald-green transition-colors ease-in-out"
+        >
+          Eltip bermek we tölemek
+        </nuxt-link>
+        <nuxt-link
+          to="/privacyPolicy"
+          class="cursor-pointer text-md mb-1 hover:text-emerald-green transition-colors ease-in-out"
+        >
+          Ulanyş düzgünleri we gizlinlik ýörelgesi
+        </nuxt-link>
+        <nuxt-link
+          to="/partnership"
+          class="cursor-pointer text-md hover:text-emerald-green transition-colors ease-in-out"
+        >
+          Hyzmatdaşlyk
+        </nuxt-link>
+      </ul>
 
-        <ul>
-          <h1 class="font-bold text-lg">Habarlaşmak</h1>
-          <li
-            class="cursor-pointer text-md mb-1 hover:text-emerald-green transition-colors ease-in-out"
-          ></li>
-          <li
-            class="cursor-pointer text-md mb-1 hover:text-emerald-green transition-colors ease-in-out"
-          >
-            E-poçtalarymyz: megamaster8856@gmail.com
-          </li>
-          <li
-            class="cursor-pointer text-md hover:text-emerald-green transition-colors ease-in-out"
-          >
-            Habarlaşmak: +99364028855
-          </li>
-        </ul>
-      </nav>
+      <ul class="">
+        <h1 class="font-bold text-lg">Habarlaşmak</h1>
+        <li
+          class="cursor-pointer text-md mb-1 hover:text-emerald-green transition-colors ease-in-out"
+        ></li>
+        <li
+          class="cursor-pointer text-md mb-1 hover:text-emerald-green transition-colors ease-in-out"
+        >
+          E-poçtalarymyz: megamaster8856@gmail.com
+        </li>
+        <li
+          class="cursor-pointer text-md hover:text-emerald-green transition-colors ease-in-out"
+        >
+          Habarlaşmak: +99364028855
+        </li>
+      </ul>
     </div>
     <div class="text-center border-t py-4">
       <p class="text-sm">

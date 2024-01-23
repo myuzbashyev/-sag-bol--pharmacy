@@ -38,7 +38,7 @@
           >Saglyk we derman &rarr;</nuxt-link
         >
         <nav class="mt-5">
-          <ul class="flex flex-wrap gap-2 xs:justify-normal">
+          <ul class="flex flex-wrap justify-center sx:justify-normal gap-2">
             <UiCard
               v-for="item in medicine"
               :key="item.id"
@@ -63,7 +63,7 @@
           Lukmançylyk enjamlary &rarr;</nuxt-link
         >
         <nav class="mt-5">
-          <ul class="flex flex-wrap justify-center gap-2 xs:justify-normal">
+          <ul class="flex flex-wrap justify-center sx:justify-normal gap-2">
             <UiCard
               v-for="item in doctor"
               :key="item.id"
@@ -87,7 +87,7 @@
           >Maýyp adamlar uçin &rarr;</nuxt-link
         >
         <nav class="mt-5">
-          <ul class="flex flex-wrap gap-2">
+          <ul class="flex flex-wrap justify-center sx:justify-normal gap-2">
             <UiCard
               v-for="item in disabilities"
               :key="item.id"
