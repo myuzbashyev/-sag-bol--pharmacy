@@ -1,8 +1,8 @@
 <template>
   <nuxt-layout>
-    <section class="h-screen">
-      <div class="container py-10">
-        <div class="flex justify-between mb-5">
+    <section :class="shoppingCart.length > 5 ? 'h-full' : 'h-screen'">
+      <div class="px-3 max-w-7xl mx-auto py-10">
+        <div class="flex justify-between flex-col sx:flex-row gap-3 mb-5">
           <h1 class="text-2xl font-bold">Sebedim ({{ itemsCount }})</h1>
           <Button
             @click="allItemsStore.clearShoppingCart"
@@ -18,8 +18,9 @@
           <i class="pi pi-shopping-cart text-9xl"></i>
           <h1 class="text-3xl">Sebediňiz boş</h1>
         </div>
-        <div v-else class="flex justify-between gap-5">
-          <div class="bg-white flex-1 h-full">
+        <div v-else class="flex justify-between flex-col lg:flex-row gap-5">
+          <!-- Card -->
+          <div class="bg-white flex-1 h-full overflow-y-scroll">
             <nav>
               <ul>
                 <ShoppingItem
@@ -35,7 +36,9 @@
               </ul>
             </nav>
           </div>
-          <div>
+
+          <!-- Prices -->
+          <div class="hidden lg:block">
             <nav class="bg-white w-64 h-52 p-2 shadow rounded">
               <ul class="text-lg">
                 <li class="py-1 border-b">Sebedim:</li>
@@ -56,6 +59,37 @@
               Sargydy taýýarlamak
             </button>
           </div>
+          <aside class="lg:hidden">
+            <aside class="flex">
+              <p class="bg-white px-3 flex-1 flex justify-between items-center">
+                <span
+                  ><i
+                    :class="
+                      pricesRef
+                        ? 'pi pi-chevron-up cursor-pointer'
+                        : 'pi pi-chevron-down cursor-pointer'
+                    "
+                    @click="pricesRef = !pricesRef"
+                  ></i>
+                  Jemi:</span
+                >
+                <span class="font-bold">{{ sum + 15 }} TMT</span>
+              </p>
+
+              <button class="bg-lint py-2 flex-1">Sargydy taýýarlamak</button>
+            </aside>
+            <ul
+              class="bg-white opacity-0 invisible transition-opacity duration-300 ease-in-out"
+              :class="{ 'opacity-100 !visible': pricesRef }"
+            >
+              <li class="flex justify-between px-3">
+                Bahasy: <span class="font-bold">{{ sum }} TMT</span>
+              </li>
+              <li class="flex justify-between px-3">
+                Eltip berme: <span class="font-bold">{{ 15 }} TMT</span>
+              </li>
+            </ul>
+          </aside>
         </div>
       </div>
     </section>
@@ -67,4 +101,6 @@ import ShoppingItem from "~/components/ui/shoppingItem.vue";
 
 const allItemsStore = useAllItems();
 const { shoppingCart, sum, itemsCount } = storeToRefs(allItemsStore);
+
+const pricesRef = ref(false);
 </script>

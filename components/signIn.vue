@@ -1,11 +1,11 @@
 <template>
   <div
-    class="bg-white text-forest-green shadow-md p-10 rounded-xl fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30"
+    class="bg-white text-forest-green shadow-md p-5 sx:p-10 rounded-xl fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30"
   >
     <h1 class="text-center text-xl mb-2">Hoş geldiňiz</h1>
     <p class="text-center text-lg mb-5" v-if="isRegistered">Agza Bol</p>
     <p class="text-center text-lg mb-5" v-else>Içeri gir</p>
-    <form action="sign up" class="w-80">
+    <form action="sign up" class="w-56 sx:w-80">
       <label for="phone_number" class="block text-sm">Telefon</label>
       <input
         type="integer"

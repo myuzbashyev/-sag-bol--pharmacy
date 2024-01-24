@@ -1,6 +1,6 @@
 <template>
   <nuxt-layout>
-    <section class="h-screen">
+    <section :class="favItems.length > 10 ? 'h-full' : 'h-screen'">
       <div class="container py-10">
         <h1 class="text-2xl font-bold mb-5">
           Halanlarym ({{ favItems.length }})

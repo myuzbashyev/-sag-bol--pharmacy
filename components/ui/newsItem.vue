@@ -1,12 +1,14 @@
 <template>
   <nuxt-link
     :to="`${useRoute().fullPath}/${link}`"
-    class="border bg-white shadow w-80 rounded-lg"
+    class="border bg-white shadow w-72 rounded-lg flex flex-col"
   >
-    <img :src="image" alt="News image" class="rounded-t-lg" />
+    <img :src="image" alt="News image" class="rounded-t-lg h-48" />
     <div class="p-5">
       <h1 class="mb-3 font-bold">{{ title }}</h1>
-      <p>{{ description }}</p>
+      <p class="overflow-hidden line-clamp-2 text-ellipsis break-words">
+        {{ description }}
+      </p>
       <span class="text-xs">{{ publishedAt }}</span>
     </div>
   </nuxt-link>

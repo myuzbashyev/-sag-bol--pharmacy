@@ -1,15 +1,15 @@
 <template>
   <nuxt-link
     :to="`${useRoute().fullPath}/${id}`"
-    class="bg-white rounded-lg p-5 w-72 flex flex-col justify-between"
+    class="bg-white rounded-lg w-72 flex flex-col justify-between"
   >
     <img
       v-if="image !== undefined"
       :src="image"
       alt="Book title image"
-      class="mb-2"
+      class="mb-2 h-52 rounded-t-lg"
     />
-    <div>
+    <div class="p-5">
       <h1 class="font-bold mb-2">{{ title }}</h1>
       <p class="text-sm">{{ author }}</p>
     </div>

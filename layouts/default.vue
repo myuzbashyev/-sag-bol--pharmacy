@@ -1,7 +1,7 @@
 <template>
   <header class="text-forest-green bg-lint p-2">
     <div
-      class="xl:w-9/12 mx-auto flex justify-between items-center p-0 bg-transparent border-none"
+      class="xl:max-w-7xl xl:mx-auto flex justify-between flex-wrap items-center p-0 bg-transparent border-none"
     >
       <div>
         <nuxt-link class="flex" to="/">
@@ -89,7 +89,7 @@
           Aşgabat
         </div>
       </div>
-      <div>
+      <div class="hidden xs:block">
         <nav>
           <ul class="flex">
             <nuxt-link
@@ -114,7 +114,7 @@
     class="p-2 text-forest-green sticky top-0 bg-white shadow-md z-10 transition-all duration-150 ease-in-out"
   >
     <div
-      class="px-3 xl:w-9/12 mx-auto flex justify-between items-center gap-10 p-0 bg-transparent border-none relative"
+      class="px-3 xl:max-w-7xl xl:p-0 xl:mx-auto flex justify-between items-center gap-10 p-0 bg-transparent border-none relative"
     >
       <button
         ref="categoryButton"
@@ -241,7 +241,7 @@
     >
       <nav
         ref="categoryContainer"
-        class="xl:w-9/12 mx-auto flex absolute shadow-md py-10 overflow-y-scroll h-72 left-0 right-0 bg-white"
+        class="xl:max-w-7xl xl:mx-auto flex absolute shadow-md py-10 overflow-y-scroll h-72 left-0 right-0 bg-white"
       >
         <ul class="flex flex-col gap-2 border-r px-5 relative">
           <nuxt-link
@@ -325,7 +325,7 @@
 
   <footer class="bg-lint hidden xs:block">
     <div
-      class="mx-3 xl:w-9/12 xl:mx-auto flex flex-wrap py-10 gap-5 2xl:gap-16"
+      class="px-3 xl:max-w-7xl xl:p-0 xl:mx-auto flex flex-wrap xl:py-10 gap-5 2xl:gap-16"
     >
       <div class="flex flex-grow h-full">
         <svg

@@ -2,7 +2,7 @@
   <nuxt-layout>
     <div>
       <section class="mt-5">
-        <div class="px-3 xl:w-9/12 m-auto">
+        <div class="px-3 xl:max-w-7xl xl:p-0 xl:mx-auto">
           <!-- Images -->
           <Galleria
             :value="images"
@@ -31,7 +31,7 @@
       </section>
 
       <!-- Saglyk we derman -->
-      <section class="px-3 xl:w-9/12 m-auto py-16">
+      <section class="px-3 xl:max-w-7xl xl:px-0 xl:mx-auto py-16">
         <nuxt-link
           to="/category/medicine"
           class="text-2xl font-bold text-forest-green hover:text-emerald-green"
@@ -40,7 +40,7 @@
         <nav class="mt-5">
           <ul class="flex flex-wrap justify-center sx:justify-normal gap-2">
             <UiCard
-              v-for="item in medicine"
+              v-for="item in medicine.slice(0, 5)"
               :key="item.id"
               :id="item.id"
               :title="item.title"
@@ -55,7 +55,7 @@
       </section>
 
       <!-- Lukmancylyk enjamlary -->
-      <section class="px-3 xl:w-9/12 m-auto">
+      <section class="px-3 xl:max-w-7xl xl:px-0 xl:mx-auto">
         <nuxt-link
           to="/category/doctor"
           class="text-2xl font-bold text-forest-green hover:text-emerald-green"
@@ -65,7 +65,7 @@
         <nav class="mt-5">
           <ul class="flex flex-wrap justify-center sx:justify-normal gap-2">
             <UiCard
-              v-for="item in doctor"
+              v-for="item in doctor.slice(0, 5)"
               :key="item.id"
               :id="item.id"
               :title="item.title"
@@ -80,7 +80,7 @@
       </section>
 
       <!-- Mayyp adamlar ucin -->
-      <section class="px-3 xl:w-9/12 m-auto py-16">
+      <section class="px-3 xl:max-w-7xl xl:px-0 xl:mx-auto py-16">
         <nuxt-link
           to="/category/disabilities"
           class="text-2xl font-bold text-forest-green transition-colors ease-in-out hover:text-emerald-green"
@@ -89,7 +89,7 @@
         <nav class="mt-5">
           <ul class="flex flex-wrap justify-center sx:justify-normal gap-2">
             <UiCard
-              v-for="item in disabilities"
+              v-for="item in disabilities.slice(0, 5)"
               :key="item.id"
               :id="item.id"
               :title="item.title"

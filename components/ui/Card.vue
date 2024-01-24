@@ -1,6 +1,6 @@
 <template>
   <li
-    class="flex flex-col justify-between border shadow p-3 gap-5 w-32 sx:w-52"
+    class="flex flex-col justify-between border shadow p-3 gap-5 w-32 sx:w-60"
   >
     <nuxt-link :to="`${route}`">
       <span class="border flex justify-center p-2"
@@ -14,7 +14,7 @@
     </nuxt-link>
 
     <div>
-      <span class="flex flex-col xs:flex-row justify-between gap-1">
+      <span class="flex flex-col sx:flex-row justify-between gap-1">
         <p class="font-bold text-forest-green text-lg order-2 text-center">
           {{ price }} TMT
         </p>

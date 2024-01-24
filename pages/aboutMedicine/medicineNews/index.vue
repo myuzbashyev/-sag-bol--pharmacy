@@ -1,11 +1,17 @@
 <template>
-  <section>
+  <section class="relative">
+    <i
+      v-if="isLoading"
+      class="pi pi-spinner pi-spin absolute left-1/2 text-7xl"
+    ></i>
     <nav>
-      <ul class="flex flex-wrap gap-x-2 gap-y-5">
+      <ul
+        class="flex flex-wrap justify-center xs:justify-normal gap-x-2 gap-y-5"
+      >
         <UiNewsItem
           v-for="newsItem in news"
-          :link="newsItem.publishedAt.split('T')[1]"
-          :key="newsItem.publishedAt.split('T')[1]"
+          :link="newsItem.publishedAt"
+          :key="newsItem.publishedAt"
           :image="newsItem.urlToImage"
           :title="newsItem.title"
           :description="newsItem.description"
@@ -19,5 +25,5 @@
 <script setup>
 const newsStore = useNews();
 newsStore.getNews();
-const { news } = storeToRefs(newsStore);
+const { news, isLoading } = storeToRefs(newsStore);
 </script>

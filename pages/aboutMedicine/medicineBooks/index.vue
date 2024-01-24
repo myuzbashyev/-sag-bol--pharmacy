@@ -1,7 +1,10 @@
 <template>
   <section>
+    <i class="pi pi-spinner"></i>
     <nav>
-      <ul class="flex flex-wrap gap-x-2 gap-y-5">
+      <ul
+        class="flex flex-wrap justify-center xs:justify-normal gap-x-2 gap-y-5"
+      >
         <UiBookItem
           v-for="bookItem in books"
           :id="bookItem.id"
@@ -18,5 +21,5 @@
 <script setup>
 const booksStore = useBooks();
 booksStore.getBooks();
-const { books } = storeToRefs(booksStore);
+const { books, isLoading } = storeToRefs(booksStore);
 </script>

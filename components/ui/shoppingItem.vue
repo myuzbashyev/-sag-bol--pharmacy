@@ -1,15 +1,19 @@
 <template>
   <li class="border-b">
-    <div class="flex justify-between relative p-10">
-      <div class="flex gap-10">
+    <div
+      class="flex justify-between items-start flex-col gap-5 sm:flex-row sm:gap-0 sm:items-center relative p-10"
+    >
+      <div class="flex gap-2">
         <img :src="image" alt="Medicine image" />
         <div>
-          <h1 class="font-bold text-xl">{{ label }}</h1>
-          <p class="text-sm">{{ title }}</p>
+          <h1 class="font-bold text-base sx:text-xl">{{ label }}</h1>
+          <p class="text-xs sx:text-sm text-ellipsis break-words">
+            {{ title }}
+          </p>
         </div>
       </div>
-      <div class="flex gap-10 items-center">
-        <div class="bg-lint py-2 px-5 rounded-lg">
+      <div class="flex flex-wrap justify-center gap-3 items-end">
+        <div class="bg-lint rounded-lg text-sm p-1">
           <p>{{ pharmacy }}</p>
         </div>
         <div class="text-center">
@@ -25,7 +29,7 @@
               type="text"
               inputmode="numeric"
               v-model="count"
-              class="bg-lint text-center outline-none"
+              class="bg-lint text-center outline-none w-14 xs:w-20"
             />
             <button
               @click="allItemsStore.increasePrice(id)"
