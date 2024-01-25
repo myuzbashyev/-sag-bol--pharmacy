@@ -1,13 +1,15 @@
 <template>
   <nuxt-layout>
-    <section class="container py-10 text-forest-green">
+    <section class="px-2 xl:max-w-7xl mx-auto py-10 text-forest-green">
       <div
-        class="flex justify-around items-center bg-white rounded-lg p-5 border shadow"
+        class="flex flex-col gap-10 lg:flex-row lg:justify-center bg-white rounded-lg p-5 border shadow"
       >
-        <div class="p-32 border rounded-lg flex h-1/2">
+        <div
+          class="p-10 sx:p-20 xs:p-32 border rounded-lg flex justify-center h-1/2"
+        >
           <img :src="filteredItem.img" alt="Image of medicine" />
         </div>
-        <div class="w-1/2">
+        <div class="w-full lg:w-1/2">
           <nav class="mb-5">
             <ul>
               <li class="p-1">
@@ -61,7 +63,9 @@
               </li>
             </ul>
           </nav>
-          <div class="flex gap-10 items-center mt-10">
+          <div
+            class="flex flex-col gap-5 mt-10 sx:gap-10 sx:flex-row sx:items-center"
+          >
             <h1 class="font-bold text-2xl">{{ filteredItem.price }} TMT</h1>
             <div class="flex items-center gap-5 flex-1">
               <button

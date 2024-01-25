@@ -1,13 +1,13 @@
 <template>
   <NuxtLayout>
-    <section class="container py-10">
+    <section class="px-3 xl:max-w-7xl mx-auto py-10">
       <h1 class="text-2xl font-bold text-forest-green">
         {{ filteredCategory.label }}
       </h1>
       <nav class="py-5 border-b border-forest-green mb-5">
-        <ul>
+        <ul class="flex flex-wrap gap-2">
           <nuxt-link
-            class="py-1 px-5 border mr-5 rounded-full bg-white"
+            class="py-1 px-5 border rounded-full bg-white"
             :to="`${useRoute().fullPath}/${subcategory.subcategory}`"
             v-for="subcategory in filteredCategory.items"
             :key="subcategory.title"
