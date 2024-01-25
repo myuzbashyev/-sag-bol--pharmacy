@@ -1,7 +1,7 @@
 export const useNews = defineStore("news", {
   state: () => ({
     news: [],
-    isLoading: false,
+    isLoadingNews: false,
   }),
   getters: {
     date() {
@@ -12,12 +12,12 @@ export const useNews = defineStore("news", {
   },
   actions: {
     async getNews() {
-      this.isLoading = true;
+      this.isLoadingNews = true;
       const fetchedNews: any = await $fetch(
         `https://newsapi.org/v2/everything?q=medicine&from=${this.date}&sortBy=publishedAt&language=ru&apiKey=3921f5cb9524428e84e459b368cddfb9`
       );
       this.news = fetchedNews.articles;
-      this.isLoading = false;
+      this.isLoadingNews = false;
     },
   },
 });

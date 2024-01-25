@@ -126,13 +126,15 @@
         Kategoriýalar
       </button>
       <button
-        ref="categoryButton"
+        ref="categoryButtonMobile"
         class="py-2.5 px-5 rounded-lg bg-white transition-colors duration-150 ease-in-out hover:bg-lint-1 outline-none hidden xs:block lg:hidden"
         :class="{ lint: isMenuVisible }"
         @click="openToggler('isMenuVisible')"
       >
         <i class="pi pi-th-large text-lg text-emerald-green"></i>
       </button>
+
+      <!-- Search Input -->
       <div class="flex-1">
         <span
           class="flex items-center bg-search border rounded-xl px-5 relative"
@@ -215,7 +217,7 @@
               style="font-size: 1.3rem; color: #478c5c"
             ></i>
           </nuxt-link>
-          <nuxt-link to="/aboutMedicine"
+          <nuxt-link to="/aboutMedicine/medicineNews"
             ><i class="pi pi-book" style="font-size: 1.3rem; color: #478c5c"></i
           ></nuxt-link>
 
@@ -527,6 +529,8 @@ const signInButton = ref(null);
 function openToggler(toggler) {
   const togglerName = eval(toggler);
   togglerName.value = true;
+  console.log(togglerName.value);
+
   document.body.classList.add("overflow-hidden");
 }
 function closeToggler(toggler) {
@@ -546,7 +550,7 @@ const { categories } = storeToRefs(categoriesStore);
 const categoryButton = ref(null);
 const categoryContainer = ref(null);
 const mobileCategory = ref(null);
-
+const categoryButtonMobile = ref(null);
 // Date for header
 const headerDate = new Date().toLocaleDateString();
 
@@ -559,9 +563,11 @@ onMounted(() => {
       categoryContainer.value &&
       !categoryContainer.value.contains(event.target) &&
       !categoryButton.value.contains(event.target) &&
-      !mobileCategory.value.contains(event.target)
+      !mobileCategory.value.contains(event.target) &&
+      !categoryButtonMobile.value.contains(event.target)
     ) {
       closeToggler("isMenuVisible");
+      console.log(isMenuVisible.value);
     }
   };
   const closeSearchOnOutsideClick = (event) => {
