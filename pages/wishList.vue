@@ -1,16 +1,16 @@
 <template>
   <nuxt-layout>
     <section :class="favItems.length > 10 ? 'h-full' : 'h-screen'">
-      <div class="px-3 xl:max-w-7xl max-auto py-10">
+      <div class="px-3 xl:max-w-7xl mx-auto py-10">
         <h1 class="text-2xl font-bold mb-5">
           Halanlarym ({{ favItems.length }})
         </h1>
         <div
           v-if="favItems.length <= 0"
-          class="bg-white w-full h-96 flex justify-center items-center gap-5 shadow rounded"
+          class="bg-white w-full h-96 flex flex-wrap justify-center items-center gap-5 shadow rounded"
         >
           <i class="pi pi-heart text-9xl"></i>
-          <h1 class="text-3xl">Halan dermanlaryňyzyň sanawy boş</h1>
+          <h1 class="text-3xl text-center">Halan dermanlaryňyzyň sanawy boş</h1>
         </div>
         <nav v-else>
           <ul class="flex flex-wrap gap-1">
