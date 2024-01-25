@@ -100,7 +100,7 @@
       >
       <nuxt-link
         @click="isSidebarVisible = false"
-        to="/aboutMedicine"
+        to="/aboutMedicine/medicineNews"
         class="p-3 transition-hover ease-in-out hover:border-l-2 border-emerald-green hover:shadow-sm"
       >
         <i class="pi pi-book"></i>

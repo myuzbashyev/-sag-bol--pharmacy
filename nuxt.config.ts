@@ -8,7 +8,6 @@ export default defineNuxtConfig({
   alias: {
     pinia: "/node_modules/@pinia/nuxt/node_modules/pinia/dist/pinia.mjs",
   },
-
   tailwindcss: {
     configPath: "~/tailwind.config.js",
     cssPath: "@/assets/css/tailwind.css",
